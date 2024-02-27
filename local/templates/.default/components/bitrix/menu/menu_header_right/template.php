@@ -1,7 +1,7 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 
 <?if (!empty($arResult)):?>
-<nav class="header-nav">
+    <nav class="header-nav">
 
 <?
 foreach($arResult as $arItem):
@@ -9,9 +9,6 @@ foreach($arResult as $arItem):
 		continue;
 ?>
     <a class="header-nav__item" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a>
-
-
 <?endforeach?>
-
 </nav>
 <?endif?>
