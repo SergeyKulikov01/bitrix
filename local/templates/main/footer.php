@@ -148,7 +148,16 @@
                     <div class="footer-content__subcol">
                         <div class="footer-content__subcol-top">
                             <div class="footer-content__contacts">
-                                <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800">8 (86147) 2-58-00</a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
+                                <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800"><?$APPLICATION->IncludeComponent(
+                                        "bitrix:main.include",
+                                        "phone",
+                                        Array(
+                                            "AREA_FILE_SHOW" => "file",
+                                            "AREA_FILE_SUFFIX" => "inc",
+                                            "EDIT_TEMPLATE" => "",
+                                            "PATH" => "include/phone_inc.php"
+                                        )
+                                    );?></a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
                             </div>
                         </div>
                         <div class="footer-content__subcol-bot">
@@ -251,7 +260,16 @@
                 </div>
                 <div class="footer-content__col right">
                     <div class="footer-content__contacts">
-                        <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800">8 (86147) 2-58-00</a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
+                        <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800"><?$APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "phone",
+                                Array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "AREA_FILE_SUFFIX" => "inc",
+                                    "EDIT_TEMPLATE" => "",
+                                    "PATH" => "include/phone_inc.php"
+                                )
+                            );?></a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
                     </div>
                 </div>
             </div>
