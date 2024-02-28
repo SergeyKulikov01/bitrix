@@ -1,17 +1,17 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 IncludeTemplateLangFile(__FILE__);
 
+use Bitrix\Main\Page\Asset;
+$asset = Asset::getInstance();
+$asset->addCss(SITE_TEMPLATE_PATH."/assets/styles/590.css");
+$asset->addCss(SITE_TEMPLATE_PATH."/assets/styles/app.css");
+$asset->addJs(SITE_TEMPLATE_PATH."/assets/vendor.js");
+$asset->addJs(SITE_TEMPLATE_PATH."/assets/app.js");
+$asset->addString('<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">');
 
 ?>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>test-html</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <script defer="defer" src="<?php echo SITE_TEMPLATE_PATH ?>/assets/vendor.js"></script>
-    <script defer="defer" src="<?php echo SITE_TEMPLATE_PATH ?>/assets/app.js"></script>
-    <link href="<?php echo SITE_TEMPLATE_PATH ?>/assets/styles/590.css" rel="stylesheet">
-    <link href="<?php echo SITE_TEMPLATE_PATH ?>/assets/styles/app.css" rel="stylesheet">
     <?$APPLICATION->ShowHead();?>
     <title><?$APPLICATION->ShowTitle()?></title>
 </head>
@@ -120,7 +120,7 @@ IncludeTemplateLangFile(__FILE__);
     </div>
 </header>
     <main class="main">
-        <div class="banner"></div>
+<!--        <div class="banner"></div>-->
         <div class="header-main" data-header-menu data-overlay-on data-header-component="menu">
             <div class="header-main__wrapper desktop">
                 <div class="header-main__inner">
@@ -239,18 +239,18 @@ IncludeTemplateLangFile(__FILE__);
                     <div class="header-main__col right">
                         <div class="header-main__contacts">
                             <div class="header-main__contacts-col">
-                                <div class="header-main__contacts-office">Центральный офис</div><a class="header-main__contacts-tel" href="tel:+78614725800"><?$APPLICATION->IncludeComponent(
+                                <div class="header-main__contacts-office">Центральный офис</div><?$APPLICATION->IncludeComponent(
                                         "bitrix:main.include",
                                         "phone",
                                         array(
                                             "AREA_FILE_SHOW" => "file",
                                             "AREA_FILE_SUFFIX" => "inc",
                                             "EDIT_TEMPLATE" => "",
-                                            "PATH" => "/local/include/phone_inc.php",
+                                            "PATH" => "/local/include/phone_header_inc.php",
                                             "COMPONENT_TEMPLATE" => "phone"
                                         ),
                                         false
-                                    );?></a><a class="header-main__contacts-mail" href="mailto:zdor_prod@mail.ru">
+                                    );?>
                                     <?$APPLICATION->IncludeComponent(
                                         "bitrix:main.include",
                                         "phone",
@@ -258,18 +258,41 @@ IncludeTemplateLangFile(__FILE__);
                                             "AREA_FILE_SHOW" => "file",
                                             "AREA_FILE_SUFFIX" => "inc",
                                             "EDIT_TEMPLATE" => "",
-                                            "PATH" => "/local/include/email_inc.php",
+                                            "PATH" => "/local/include/email_header_inc.php",
                                             "COMPONENT_TEMPLATE" => "email"
                                         ),
                                         false
                                     );?>
-                                </a>
                             </div>
                             <div class="header-main__contacts-col right-col">
-                                <div class="header-main__contacts-top"><a class="header-main__contacts-policy" href="#">Политика конфиденциальности</a></div>
+                                <div class="header-main__contacts-top">
+                                    <?$APPLICATION->IncludeComponent(
+                                        "bitrix:main.include",
+                                        "phone",
+                                        array(
+                                            "AREA_FILE_SHOW" => "file",
+                                            "AREA_FILE_SUFFIX" => "inc",
+                                            "EDIT_TEMPLATE" => "",
+                                            "PATH" => "/local/include/policy_header_inc.php",
+                                            "COMPONENT_TEMPLATE" => "email"
+                                        ),
+                                        false
+                                    );?>
+                                </div>
                                 <div class="header-main__contacts-bot">
                                     <div class="header-main__contacts-copy">© 2008-20<? echo date("y"); ?> «Здоровые продукты»</div>
-                                    <div class="header-main__contacts-dev"><span>Сделано в</span><a href="#" target="blank"> Клаудмил</a></div>
+                                    <?$APPLICATION->IncludeComponent(
+                                        "bitrix:main.include",
+                                        "phone",
+                                        array(
+                                            "AREA_FILE_SHOW" => "file",
+                                            "AREA_FILE_SUFFIX" => "inc",
+                                            "EDIT_TEMPLATE" => "",
+                                            "PATH" => "/local/include/copyright_header_inc.php",
+                                            "COMPONENT_TEMPLATE" => "email"
+                                        ),
+                                        false
+                                    );?>
                                 </div>
                             </div>
                         </div>
@@ -355,9 +378,32 @@ IncludeTemplateLangFile(__FILE__);
                         </div>
                     </div>
                     <div class="header-main__contacts-col">
-                        <div class="header-main__contacts-top"><a class="header-main__contacts-policy" href="#">Политика конфиденциальности</a>
+                        <div class="header-main__contacts-top">
+                            <?$APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "phone",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "AREA_FILE_SUFFIX" => "inc",
+                                    "EDIT_TEMPLATE" => "",
+                                    "PATH" => "/local/include/policy_header_inc.php",
+                                    "COMPONENT_TEMPLATE" => "email"
+                                ),
+                                false
+                            );?>
                             <div class="header-main__contacts-copy">© 2008-20<? echo date("y"); ?> «Здоровые продукты»</div>
-                            <div class="header-main__contacts-dev"><span>Сделано в</span><a href="#"> Клаудмил</a></div>
+                            <?$APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "phone",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "AREA_FILE_SUFFIX" => "inc",
+                                    "EDIT_TEMPLATE" => "",
+                                    "PATH" => "/local/include/copyright_header_inc.php",
+                                    "COMPONENT_TEMPLATE" => "email"
+                                ),
+                                false
+                            );?>
                         </div>
                     </div>
                 </div>

@@ -119,7 +119,18 @@
                                 </ul>
                             </nav>
                         </div>
-                        <div class="footer-content__subcol-bot"><a class="footer-content__policy" href="#">Политика конфиденциальности</a></div>
+                        <div class="footer-content__subcol-bot"><?$APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "phone",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "AREA_FILE_SUFFIX" => "inc",
+                                    "EDIT_TEMPLATE" => "",
+                                    "PATH" => "/local/include/policy_inc.php",
+                                    "COMPONENT_TEMPLATE" => "email"
+                                ),
+                                false
+                            );?></div>
                     </div>
                     <div class="footer-content__subcol">
                         <div class="footer-content__subcol-top">
@@ -148,7 +159,7 @@
                     <div class="footer-content__subcol">
                         <div class="footer-content__subcol-top">
                             <div class="footer-content__contacts">
-                                <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800">
+                                <div class="footer-content__contacts-title">Центральный офис</div>
                                     <?$APPLICATION->IncludeComponent(
                                     	"bitrix:main.include",
                                     	"phone",
@@ -161,7 +172,7 @@
                                     	),
                                     	false
                                     );?>
-                                </a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">
+
                                     <?$APPLICATION->IncludeComponent(
                                         "bitrix:main.include",
                                         "phone",
@@ -174,11 +185,22 @@
                                         ),
                                         false
                                     );?>
-                                </a>
+
                             </div>
                         </div>
                         <div class="footer-content__subcol-bot">
-                            <p class="footer-content__cloud-copy">Сделано в <a href="https://cloudmill.ru" target="_blank">Клаудмил</a></p>
+                            <?$APPLICATION->IncludeComponent(
+                                "bitrix:main.include",
+                                "phone",
+                                array(
+                                    "AREA_FILE_SHOW" => "file",
+                                    "AREA_FILE_SUFFIX" => "inc",
+                                    "EDIT_TEMPLATE" => "",
+                                    "PATH" => "/local/include/copyright_inc.php",
+                                    "COMPONENT_TEMPLATE" => "email"
+                                ),
+                                false
+                            );?>
                         </div>
                     </div>
                 </div>
@@ -277,16 +299,31 @@
                 </div>
                 <div class="footer-content__col right">
                     <div class="footer-content__contacts">
-                        <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800"><?$APPLICATION->IncludeComponent(
-                                "bitrix:main.include",
-                                "phone",
-                                Array(
-                                    "AREA_FILE_SHOW" => "file",
-                                    "AREA_FILE_SUFFIX" => "inc",
-                                    "EDIT_TEMPLATE" => "",
-                                    "PATH" => "include/phone_inc.php"
-                                )
-                            );?></a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
+                        <div class="footer-content__contacts-title">Центральный офис</div><?$APPLICATION->IncludeComponent(
+                            "bitrix:main.include",
+                            "phone",
+                            array(
+                                "AREA_FILE_SHOW" => "file",
+                                "AREA_FILE_SUFFIX" => "inc",
+                                "EDIT_TEMPLATE" => "",
+                                "PATH" => "/local/include/phone_inc.php",
+                                "COMPONENT_TEMPLATE" => "phone"
+                            ),
+                            false
+                        );?>
+
+                        <?$APPLICATION->IncludeComponent(
+                            "bitrix:main.include",
+                            "phone",
+                            array(
+                                "AREA_FILE_SHOW" => "file",
+                                "AREA_FILE_SUFFIX" => "inc",
+                                "EDIT_TEMPLATE" => "",
+                                "PATH" => "/local/include/email_inc.php",
+                                "COMPONENT_TEMPLATE" => "email"
+                            ),
+                            false
+                        );?>
                     </div>
                 </div>
             </div>
@@ -341,8 +378,31 @@
                 </div>
             </div>
             <div class="footer-content__row-bot">
-                <div class="footer-content__rect-copy">© 2008-20<? echo date("y"); ?> «Здоровые продукты»</div><a class="footer-content__policy" href="#">Политика конфиденциальности</a>
-                <p class="footer-content__cloud-copy">Сделано в <a href="https://cloudmill.ru" target="_blank">Клаудмил</a></p>
+                <div class="footer-content__rect-copy">© 2008-20<? echo date("y"); ?> «Здоровые продукты»</div>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:main.include",
+                    "phone",
+                    array(
+                        "AREA_FILE_SHOW" => "file",
+                        "AREA_FILE_SUFFIX" => "inc",
+                        "EDIT_TEMPLATE" => "",
+                        "PATH" => "/local/include/policy_inc.php",
+                        "COMPONENT_TEMPLATE" => "email"
+                    ),
+                    false
+                );?>
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:main.include",
+                    "phone",
+                    array(
+                        "AREA_FILE_SHOW" => "file",
+                        "AREA_FILE_SUFFIX" => "inc",
+                        "EDIT_TEMPLATE" => "",
+                        "PATH" => "/local/include/copyright_inc.php",
+                        "COMPONENT_TEMPLATE" => "email"
+                    ),
+                    false
+                );?>
             </div>
         </div>
     </div>
