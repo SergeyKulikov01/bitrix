@@ -607,4 +607,4 @@ $APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
 		</div>
 	</div>
 </div>
- <br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -197,24 +197,24 @@ IncludeTemplateLangFile(__FILE__);
                         <div class="header-main__navigation">
                             <div class="header-main__navigation-col">
                                 <?$APPLICATION->IncludeComponent(
-	"bitrix:menu", 
-	"mainmenu_modal", 
-	array(
-		"ALLOW_MULTI_SELECT" => "N",
-		"CHILD_MENU_TYPE" => "left",
-		"COMPONENT_TEMPLATE" => "mainmenu_modal",
-		"DELAY" => "N",
-		"MAX_LEVEL" => "1",
-		"MENU_CACHE_GET_VARS" => array(
-		),
-		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_TYPE" => "N",
-		"MENU_CACHE_USE_GROUPS" => "Y",
-		"ROOT_MENU_TYPE" => "main",
-		"USE_EXT" => "N"
-	),
-	false
-);?>
+                                        "bitrix:menu",
+                                        "mainmenu_modal",
+                                        array(
+                                            "ALLOW_MULTI_SELECT" => "N",
+                                            "CHILD_MENU_TYPE" => "left",
+                                            "COMPONENT_TEMPLATE" => "mainmenu_modal",
+                                            "DELAY" => "N",
+                                            "MAX_LEVEL" => "1",
+                                            "MENU_CACHE_GET_VARS" => array(
+                                            ),
+                                            "MENU_CACHE_TIME" => "3600",
+                                            "MENU_CACHE_TYPE" => "N",
+                                            "MENU_CACHE_USE_GROUPS" => "Y",
+                                            "ROOT_MENU_TYPE" => "main",
+                                            "USE_EXT" => "N"
+                                        ),
+                                        false
+                                    );?>
                             </div>
                             <div class="header-main__navigation-col">
                                 <?$APPLICATION->IncludeComponent(
@@ -242,13 +242,28 @@ IncludeTemplateLangFile(__FILE__);
                                 <div class="header-main__contacts-office">Центральный офис</div><a class="header-main__contacts-tel" href="tel:+78614725800"><?$APPLICATION->IncludeComponent(
                                         "bitrix:main.include",
                                         "phone",
-                                        Array(
+                                        array(
                                             "AREA_FILE_SHOW" => "file",
                                             "AREA_FILE_SUFFIX" => "inc",
                                             "EDIT_TEMPLATE" => "",
-                                            "PATH" => "include/phone_inc.php"
-                                        )
-                                    );?></a><a class="header-main__contacts-mail" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
+                                            "PATH" => "/local/include/phone_inc.php",
+                                            "COMPONENT_TEMPLATE" => "phone"
+                                        ),
+                                        false
+                                    );?></a><a class="header-main__contacts-mail" href="mailto:zdor_prod@mail.ru">
+                                    <?$APPLICATION->IncludeComponent(
+                                        "bitrix:main.include",
+                                        "phone",
+                                        array(
+                                            "AREA_FILE_SHOW" => "file",
+                                            "AREA_FILE_SUFFIX" => "inc",
+                                            "EDIT_TEMPLATE" => "",
+                                            "PATH" => "/local/include/email_inc.php",
+                                            "COMPONENT_TEMPLATE" => "email"
+                                        ),
+                                        false
+                                    );?>
+                                </a>
                             </div>
                             <div class="header-main__contacts-col right-col">
                                 <div class="header-main__contacts-top"><a class="header-main__contacts-policy" href="#">Политика конфиденциальности</a></div>
@@ -279,13 +294,28 @@ IncludeTemplateLangFile(__FILE__);
                                 <div class="header-main__contacts-office">Центральный офис</div><a class="header-main__contacts-tel" href="tel:+78614725800"><?$APPLICATION->IncludeComponent(
                                         "bitrix:main.include",
                                         "phone",
-                                        Array(
+                                        array(
                                             "AREA_FILE_SHOW" => "file",
                                             "AREA_FILE_SUFFIX" => "inc",
                                             "EDIT_TEMPLATE" => "",
-                                            "PATH" => "include/phone_inc.php"
-                                        )
-                                    );?></a><a class="header-main__contacts-mail" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
+                                            "PATH" => "/local/include/phone_inc.php",
+                                            "COMPONENT_TEMPLATE" => "phone"
+                                        ),
+                                        false
+                                    );?></a><a class="header-main__contacts-mail" href="mailto:zdor_prod@mail.ru">
+                                    <?$APPLICATION->IncludeComponent(
+                                        "bitrix:main.include",
+                                        "phone",
+                                        array(
+                                            "AREA_FILE_SHOW" => "file",
+                                            "AREA_FILE_SUFFIX" => "inc",
+                                            "EDIT_TEMPLATE" => "",
+                                            "PATH" => "/local/include/email_inc.php",
+                                            "COMPONENT_TEMPLATE" => "email"
+                                        ),
+                                        false
+                                    );?>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -326,7 +356,7 @@ IncludeTemplateLangFile(__FILE__);
                     </div>
                     <div class="header-main__contacts-col">
                         <div class="header-main__contacts-top"><a class="header-main__contacts-policy" href="#">Политика конфиденциальности</a>
-                            <div class="header-main__contacts-copy">© 2008-2023 «Здоровые продукты»</div>
+                            <div class="header-main__contacts-copy">© 2008-20<? echo date("y"); ?> «Здоровые продукты»</div>
                             <div class="header-main__contacts-dev"><span>Сделано в</span><a href="#"> Клаудмил</a></div>
                         </div>
                     </div>
@@ -498,23 +528,34 @@ IncludeTemplateLangFile(__FILE__);
             <div class="popup-vacancies__inner" data-form-wrapper="mail-corp">
                 <div class="popup-vacancies__wrapper">
                     <div class="popup-vacancies__title">Написать нам</div>
-                    <form class="popup-vacancies__form" action="" data-form="mail-corp">
-                        <div class="input-wrapper" data-input-parent="">
-                            <div class="input-wrapper__placeholder">Имя</div><input class="input" data-input="" required data-mask-text="" data-parsley-pattern="^[А-Яа-яЁё -]+$" placeholder="Имя">
-                        </div>
-                        <div class="input-wrapper" data-input-parent="">
-                            <div class="input-wrapper__placeholder">Телефон</div><input class="input" data-input="" required type="tel" placeholder="Телефон" data-mask-phone="">
-                        </div>
-                        <div class="input-wrapper" data-input-parent="">
-                            <div class="input-wrapper__placeholder">E-mail</div><input class="input" data-input="" required type="email" placeholder="E-mail">
-                        </div>
-                        <div class="input-wrapper input-wrapper_textarea" data-input-parent="">
-                            <div class="input-wrapper__placeholder placeholder_background">Сообщение</div><textarea class="textarea" data-input="" type="text" placeholder="Сообщение"></textarea>
-                        </div>
-                        <p class="popup-vacancies__form-policy">Нажимая на кнопку «Отправить», вы даете согласие с&nbsp;<a href="#">политикой в отношении обработки персональных данных</a></p><button class="popup-vacancies__form-button btn-hover_parent" type="submit" data-form-button="mail-corp" data-btn-inputs>
-                            <div class="btn-hover_circle"></div><span>Отправить</span>
-                        </button>
-                    </form>
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:main.feedback",
+                        "feedback",
+                        Array(
+                            "EMAIL_TO" => "kulikovs2001@gmail.com",
+                            "EVENT_MESSAGE_ID" => array("7"),
+                            "OK_TEXT" => "Спасибо, ваше сообщение принято.",
+                            "REQUIRED_FIELDS" => array("NAME","EMAIL","MESSAGE"),
+                            "USE_CAPTCHA" => "N"
+                        )
+                    );?>
+<!--                    <form class="popup-vacancies__form" action="" data-form="mail-corp">-->
+<!--                        <div class="input-wrapper" data-input-parent="">-->
+<!--                            <div class="input-wrapper__placeholder">Имя</div><input class="input" data-input="" required data-mask-text="" data-parsley-pattern="^[А-Яа-яЁё -]+$" placeholder="Имя">-->
+<!--                        </div>-->
+<!--                        <div class="input-wrapper" data-input-parent="">-->
+<!--                            <div class="input-wrapper__placeholder">Телефон</div><input class="input" data-input="" required type="tel" placeholder="Телефон" data-mask-phone="">-->
+<!--                        </div>-->
+<!--                        <div class="input-wrapper" data-input-parent="">-->
+<!--                            <div class="input-wrapper__placeholder">E-mail</div><input class="input" data-input="" required type="email" placeholder="E-mail">-->
+<!--                        </div>-->
+<!--                        <div class="input-wrapper input-wrapper_textarea" data-input-parent="">-->
+<!--                            <div class="input-wrapper__placeholder placeholder_background">Сообщение</div><textarea class="textarea" data-input="" type="text" placeholder="Сообщение"></textarea>-->
+<!--                        </div>-->
+<!--                        <p class="popup-vacancies__form-policy">Нажимая на кнопку «Отправить», вы даете согласие с&nbsp;<a href="#">политикой в отношении обработки персональных данных</a></p><button class="popup-vacancies__form-button btn-hover_parent" type="submit" data-form-button="mail-corp" data-btn-inputs>-->
+<!--                            <div class="btn-hover_circle"></div><span>Отправить</span>-->
+<!--                        </button>-->
+<!--                    </form>-->
                 </div>
             </div>
             <div class="popup-vacancies__send" data-form-send="mail-corp">

@@ -148,16 +148,33 @@
                     <div class="footer-content__subcol">
                         <div class="footer-content__subcol-top">
                             <div class="footer-content__contacts">
-                                <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800"><?$APPLICATION->IncludeComponent(
+                                <div class="footer-content__contacts-title">Центральный офис</div><a class="footer-content__contacts-tel" href="tel:+88614725800">
+                                    <?$APPLICATION->IncludeComponent(
+                                    	"bitrix:main.include",
+                                    	"phone",
+                                    	array(
+                                    		"AREA_FILE_SHOW" => "file",
+                                    		"AREA_FILE_SUFFIX" => "inc",
+                                    		"EDIT_TEMPLATE" => "",
+                                    		"PATH" => "/local/include/phone_inc.php",
+                                    		"COMPONENT_TEMPLATE" => "phone"
+                                    	),
+                                    	false
+                                    );?>
+                                </a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">
+                                    <?$APPLICATION->IncludeComponent(
                                         "bitrix:main.include",
                                         "phone",
-                                        Array(
+                                        array(
                                             "AREA_FILE_SHOW" => "file",
                                             "AREA_FILE_SUFFIX" => "inc",
                                             "EDIT_TEMPLATE" => "",
-                                            "PATH" => "include/phone_inc.php"
-                                        )
-                                    );?></a><a class="footer-content__contacts-email" href="mailto:zdor_prod@mail.ru">zdor_prod@mail.ru</a>
+                                            "PATH" => "/local/include/email_inc.php",
+                                            "COMPONENT_TEMPLATE" => "email"
+                                        ),
+                                        false
+                                    );?>
+                                </a>
                             </div>
                         </div>
                         <div class="footer-content__subcol-bot">
