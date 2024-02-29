@@ -112,7 +112,7 @@
                             "USE_EXT" => "N"
                         )
                     );?>
-                    
+
                     <div class="footer-content__subcol">
                         <div class="footer-content__subcol-top">
                             <div class="footer-content__contacts">
