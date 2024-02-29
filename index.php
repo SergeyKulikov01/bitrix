@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("1С-Битрикс: Управление сайтом");
+$APPLICATION->SetTitle("Здоровые Продукты");
 ?><section class="top-section top-section_main">
 <div class="main-slider container desktop-t">
 	<div class="main-slider__wrapper">

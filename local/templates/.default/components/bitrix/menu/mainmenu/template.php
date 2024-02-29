@@ -2,10 +2,17 @@
 
 <?if (!empty($arResult)):?>
         <?
-        foreach($arResult as $arItem):
-            if($arParams["MAX_LEVEL"] == 1 && $arItem["DEPTH_LEVEL"] > 1)
-                continue;
-            ?>
-            <li class="footer-nav__list-item"><a class="footer-content__nav-item" href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
+        foreach($arResult as $arItem):?>
+        <div class="footer-content__subcol">
+                <div class="footer-content__subcol-top">
+                    <nav class="footer-content__nav">
+                        <ul class="footer-content__nav-list">
+                            <? foreach($arItem as $item):?>
+                                <li class="footer-nav__list-item"><a class="footer-content__nav-item" href="<?=$item["LINK"]?>"><?=$item["TEXT"]?></a></li>
+                            <?endforeach?>
+                        </ul>
+                    </nav>
+                </div>
+        </div>
         <?endforeach?>
 <?endif?>
