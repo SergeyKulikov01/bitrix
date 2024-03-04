@@ -55,10 +55,4 @@ $this->setFrameMode(true);
                 </a></div>
         </div>
     </div>
-
-
-
 <?endforeach;?>
-
-
-<pre><?php var_dump($arResult[3]); ?></pre>

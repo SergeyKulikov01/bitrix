@@ -25,7 +25,7 @@ $this->setFrameMode(true);
         </div>
         <div class="main-slider__slide-bg devices">
             <picture class="picture">
-                <source type="image/webp" srcset="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"><img class="picture__img" src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>">
+                <source type="image/webp" srcset="<?=$arItem["photo_path"]?>"><img class="picture__img" src="<?=$arItem["photo_path"]?>">
             </picture>
         </div>
         <div class="main-slider__content">

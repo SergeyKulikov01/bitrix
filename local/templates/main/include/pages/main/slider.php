@@ -40,7 +40,7 @@
                         "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
                         "LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
                         "LIST_FIELD_CODE" => array("",""),
-                        "LIST_PROPERTY_CODE" => array("iconca",""),
+                        "LIST_PROPERTY_CODE" => array("iconca","discription","link",""),
                         "MESSAGE_404" => "",
                         "META_DESCRIPTION" => "-",
                         "META_KEYWORDS" => "-",
