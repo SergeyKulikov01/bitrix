@@ -51,7 +51,7 @@ $this->setFrameMode(true);
                     </svg></div>
             <? endif;?>
             <div class="main-slider__content-title" data-swiper-parallax="-1000"><?echo $arItem["NAME"]?></div>
-            <div class="main-slider__content-desk" data-swiper-parallax="-2000"><?echo $arItem["PROPERTIES"]["discription"]["VALUE"]?></div>
+            <div class="main-slider__content-desk" data-swiper-parallax="-2000"><?echo $arItem["PROPERTIES"]["description"]["VALUE"]?></div>
             <div class="main-slider__content-bot" data-swiper-parallax="-2500"><a class="main-slider__content-button btn-hover_parent" href="<?echo $arItem["link"]["USER_TYPE_SETTINGS"]["VALUE"]?>">
                     <div class="btn-hover_circle white"></div>
                     <p>Подробнее</p>

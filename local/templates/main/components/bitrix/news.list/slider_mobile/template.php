@@ -45,7 +45,7 @@ $this->setFrameMode(true);
             <? endif;?>
 
             <div class="main-slider__content-title"><?echo $arItem["NAME"]?></div>
-            <div class="main-slider__content-desk"><?echo $arItem["PROPERTIES"]["discription"]["VALUE"]?></div>
+            <div class="main-slider__content-desk"><?echo $arItem["PROPERTIES"]["description"]["VALUE"]?></div>
             <div class="main-slider__content-bot"><a class="main-slider__content-button" href="#">
                     <p>Подробнее</p>
                 </a></div>

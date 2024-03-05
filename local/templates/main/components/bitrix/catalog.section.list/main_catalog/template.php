@@ -236,7 +236,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
         </picture>
     </div>
     <div class="main-catalog__item-row">
-        <div class="main-catalog__item-title white">мороженое</div>
+        <div class="main-catalog__item-title "><? echo $arResult["SECTIONS"][0]["NAME"]?></div>
     </div>
     <div class="main-catalog__item-svg">
         <div class="button button-arrow_right btn-hover_parent">
