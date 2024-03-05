@@ -6,6 +6,7 @@ $APPLICATION->SetTitle("Здоровые Продукты");
 <div class="main-slider mobile-mob">
     <? require_once ($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH."/include/pages/main/slider_mobile.php"); ?>
 </div>
+    </section>
     <section class="main-catalog container" data-aos="fade-up" data-aos-duration="1500">
         <div class="main-catalog__top" data-aos="fade-up" data-aos-duration="1500">
             <h2 class="main-catalog__title animation-title" data-splitting data-effect1><span>каталог</span><span>продукции</span></h2>

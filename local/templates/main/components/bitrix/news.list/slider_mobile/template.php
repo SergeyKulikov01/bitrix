@@ -12,6 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<div class="swiper-wrapper">
 <?foreach($arResult["ITEMS"] as $arItem):?>
     <div class="swiper-slide main-slider__slide">
         <div class="main-slider__slide-bg mobile bg-bg-bg">
@@ -46,9 +47,13 @@ $this->setFrameMode(true);
 
             <div class="main-slider__content-title"><?echo $arItem["NAME"]?></div>
             <div class="main-slider__content-desk"><?echo $arItem["PROPERTIES"]["description"]["VALUE"]?></div>
-            <div class="main-slider__content-bot"><a class="main-slider__content-button" href="#">
-                    <p>Подробнее</p>
-                </a></div>
+            <? if ($arItem["PROPERTIES"]["link"]["VALUE"] != ''): ?>
+                <div class="main-slider__content-bot" data-swiper-parallax="-2500"><a class="main-slider__content-button btn-hover_parent" href="<?echo $arItem["PROPERTIES"]["link"]["VALUE"]?>">
+                        <div class="btn-hover_circle white"></div>
+                        <p>Подробнее</p>
+                    </a></div>
+            <? endif; ?>
         </div>
     </div>
 <?endforeach;?>
+</div>

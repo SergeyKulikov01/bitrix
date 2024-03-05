@@ -49,13 +49,15 @@ $this->setFrameMode(true);
                         <path d="M49.0057 38.6269L54.4535 37.1671L55.2455 40.1229L46.359 42.504L42.839 29.3674L51.5517 27.0329L52.3436 29.9886L47.0697 31.4018L47.6443 33.5461L52.2228 32.3193L52.9889 35.1785L48.4104 36.4053L49.0057 38.6269Z" fill="#03856D"></path>
                         <path d="M67.2875 22.8165L70.8807 21.8537L70.8963 21.9116L69.6832 36.3164L68.6786 36.5856L64.2231 31.8577C63.8843 31.5205 63.5889 31.1649 63.3368 30.7907C63.2952 31.2022 63.2171 31.6579 63.1026 32.1579L61.608 38.4802L60.6035 38.7493L52.3312 26.8861L52.3157 26.8282L55.9669 25.8498L59.098 30.5806C59.5695 31.3101 59.872 31.795 60.0054 32.0353C60.0725 31.41 60.1821 30.8147 60.3343 30.2494L61.4506 25.3743L62.2427 25.1621L65.6262 28.7486C66.107 29.2547 66.5125 29.712 66.8428 30.1205C66.8423 29.7065 66.8717 29.1465 66.9309 28.4404L67.2875 22.8165Z" fill="#03856D"></path>
                     </svg></div>
-            <? endif;?>
+            <? endif; ?>
             <div class="main-slider__content-title" data-swiper-parallax="-1000"><?echo $arItem["NAME"]?></div>
             <div class="main-slider__content-desk" data-swiper-parallax="-2000"><?echo $arItem["PROPERTIES"]["description"]["VALUE"]?></div>
-            <div class="main-slider__content-bot" data-swiper-parallax="-2500"><a class="main-slider__content-button btn-hover_parent" href="<?echo $arItem["link"]["USER_TYPE_SETTINGS"]["VALUE"]?>">
+            <? if ($arItem["PROPERTIES"]["link"]["VALUE"] != ''): ?>
+            <div class="main-slider__content-bot" data-swiper-parallax="-2500"><a class="main-slider__content-button btn-hover_parent" href="<?echo $arItem["PROPERTIES"]["link"]["VALUE"]?>">
                     <div class="btn-hover_circle white"></div>
                     <p>Подробнее</p>
                 </a></div>
+            <? endif; ?>
         </div>
     </div>
 <?endforeach;?>

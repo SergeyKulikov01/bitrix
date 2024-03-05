@@ -223,7 +223,7 @@ if (0 < $arResult["SECTIONS_COUNT"])
 }
 ?></div>
 
-
+<? foreach ($arResult['SECTIONS'] as $arSection) ?>
 <a class="main-catalog__item btn-hover_parent" href="#">
     <div class="main-catalog__item-bg desktop">
         <picture class="picture">
