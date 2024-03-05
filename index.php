@@ -90,5 +90,7 @@ $APPLICATION->SetTitle("Здоровые Продукты");
                 </div>
             </a></div>
     </section>
-
+    <section class="main-news" data-aos="fade-up" data-aos-duration="1500">
+        <? require_once ($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH."/include/pages/main/news_slider.php"); ?>
+    </section>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
