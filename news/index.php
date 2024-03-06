@@ -31,9 +31,9 @@ $APPLICATION->SetTitle("Новости и акции"); ?>
         </div>
 
 <?$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"index_news",
-	Array(
+	"bitrix:news.list", 
+	"index_news", 
+	array(
 		"ACTIVE_DATE_FORMAT" => "j F Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
@@ -54,7 +54,10 @@ $APPLICATION->SetTitle("Новости и акции"); ?>
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(0=>"",1=>"",),
+		"FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "3",
@@ -73,7 +76,10 @@ $APPLICATION->SetTitle("Новости и акции"); ?>
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => $_REQUEST["SECTION_CODE"],
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(0=>"",1=>"",),
+		"PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "Y",
@@ -86,7 +92,8 @@ $APPLICATION->SetTitle("Новости и акции"); ?>
 		"SORT_ORDER1" => "DESC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N"
-	)
+	),
+	false
 );?>
     </section>
 </section>

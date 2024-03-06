@@ -15,12 +15,12 @@ $this->setFrameMode(true);
 
 <div class="news-content__categories" data-aos="fade-up">
     <div class="news-content__categories-wrapper">
-        <a class="news-content__categories-item <? if ($_REQUEST["SECTION_CODE"] == ""){echo "active";}?> btn-hover_parent no-scale" href="/news/">
+        <a class="news-content__categories-item <? if ($arResult["SECTION"] == ''){echo "active";}?> btn-hover_parent no-scale" href="/news/">
             <div class="btn-hover_circle white"></div><span>Все</span>
         </a>
-        <?foreach($arResult["section_urls"] as $key => $arItem):?>
-        <a class="news-content__categories-item <? if ("/news/".$_REQUEST["SECTION_CODE"]."/" == $arItem){echo "active";}?> btn-hover_parent no-scale" href="<?=$arItem?>">
-            <div class="btn-hover_circle white"></div><span><?=$key?></span>
+        <?foreach($arResult["SECTIONS"] as $arItem):?>
+        <a class="news-content__categories-item <? if ($arResult["SECTION"]["PATH"][0]["CODE"] == $arItem["CODE"]){echo "active";}?> btn-hover_parent no-scale" href="<?=$arItem['SECTION_PAGE_URL']?>">
+            <div class="btn-hover_circle white"></div><span><?=$arItem['NAME']?></span>
         </a>
         <?endforeach;?>
     </div>
@@ -45,6 +45,6 @@ $this->setFrameMode(true);
     </a>
     <?endforeach;?>
 </div>
-<? if ($arResult["elem_count"] >= count($arResult["ELEMENTS"])){
+<? if ($arResult["NAV_RESULT"]->result->num_rows < $arResult["NAV_RESULT"]->NavRecordCount){
     echo $arResult["NAV_STRING"];
 }; ?>
