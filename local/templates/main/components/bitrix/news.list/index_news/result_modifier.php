@@ -1,7 +1,7 @@
 <?php
     $sections = CIBlockSection::GetList (
         Array("sort" => "ASC"),
-        Array("IBLOCK_ID" => 3, "ACTIVE" => "Y"),
+        Array("IBLOCK_ID" => $arResult['ID'], "ACTIVE" => "Y"),
         false,
         Array('ID', 'NAME', 'SECTION_PAGE_URL')
     );
