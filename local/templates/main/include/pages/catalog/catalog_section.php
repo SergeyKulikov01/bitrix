@@ -1,8 +1,4 @@
-<?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("test");
-?>Тестовая страница <br>
- <?$APPLICATION->IncludeComponent(
+<?$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"catalog_section", 
 	array(
@@ -33,7 +29,7 @@ $APPLICATION->SetTitle("test");
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "2",
 		"IBLOCK_TYPE" => "content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"MESSAGE_404" => "",
 		"NEWS_COUNT" => "20",
@@ -45,18 +41,21 @@ $APPLICATION->SetTitle("test");
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Новости",
 		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
+		"PARENT_SECTION_CODE" => $_REQUEST["SECTION_CODE"],
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
+			0 => "WEIGHT",
+			1 => "icons",
+			2 => "BOXES",
+			3 => "CNT_IN_BOX",
+			4 => "",
 		),
-		"SET_BROWSER_TITLE" => "Y",
+		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "Y",
 		"SET_META_KEYWORDS" => "Y",
 		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "Y",
+		"SET_TITLE" => "N",
 		"SHOW_404" => "N",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_BY2" => "SORT",
@@ -66,4 +65,4 @@ $APPLICATION->SetTitle("test");
 		"COMPONENT_TEMPLATE" => "catalog_section"
 	),
 	false
-);?><br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?>

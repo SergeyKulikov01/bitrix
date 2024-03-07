@@ -8,6 +8,14 @@ $arUrlRewrite=array (
     'PATH' => '/news/index.php',
     'SORT' => 100,
   ),
+  3 => 
+  array (
+    'CONDITION' => '#^/catalog/([a-zA-Z0-9_-]+)/#',
+    'RULE' => 'SECTION_CODE=$1',
+    'ID' => '',
+    'PATH' => '/catalog/index.php',
+    'SORT' => 100,
+  ),
   1 => 
   array (
     'CONDITION' => '#^/news/([a-zA-Z0-9_-]+)/#',

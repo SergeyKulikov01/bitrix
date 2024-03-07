@@ -25,70 +25,43 @@ $APPLICATION->SetTitle("Здоровые Продукты");
                     </svg></div>
             </div>
         </div>
-        <div class="main-catalog__list" data-aos="fade-up" data-aos-duration="1500"><a class="main-catalog__item btn-hover_parent" href="#">
-                <div class="main-catalog__item-bg desktop">
-                    <picture class="picture">
-                        <source type="image/webp" srcset="assets/images/main-catalog-item-bg1.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg1.png">
-                    </picture>
-                </div>
-                <div class="main-catalog__item-bg mobile">
-                    <picture class="picture">
-                        <source type="image/webp" srcset="assets/images/main-catalog-item-bg1-mobile.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg1-mobile.png">
-                    </picture>
-                </div>
-                <div class="main-catalog__item-row">
-                    <div class="main-catalog__item-title white">мороженое</div>
-                </div>
-                <div class="main-catalog__item-svg">
-                    <div class="button button-arrow_right btn-hover_parent">
-                        <div class="btn-hover_circle total-white"></div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
-                            <path d="M1.77881 11.6197C1.77881 11.2055 2.1146 10.8697 2.52881 10.8697L12.7788 10.8697L12.7788 8.75503C12.7788 6.47297 15.398 5.18387 17.2063 6.57591L20.9276 9.44056C22.3576 10.5414 22.3576 12.698 20.9276 13.7988L17.2063 16.6634C15.398 18.0555 12.7788 16.7664 12.7788 14.4843L12.7788 12.3697L2.52881 12.3697C2.1146 12.3697 1.77881 12.0339 1.77881 11.6197Z" fill="#0068FF"></path>
-                        </svg>
-                    </div>
-                </div>
-            </a><a class="main-catalog__item btn-hover_parent" href="#">
-                <div class="main-catalog__item-bg desktop">
-                    <picture class="picture">
-                        <source type="image/webp" srcset="assets/images/main-catalog-item-bg2.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg2.png">
-                    </picture>
-                </div>
-                <div class="main-catalog__item-bg mobile">
-                    <picture class="picture">
-                        <source type="image/webp" srcset="assets/images/main-catalog-item-bg2-mobile.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg2-mobile.png">
-                    </picture>
-                </div>
-                <div class="main-catalog__item-row">
-                    <div class="main-catalog__item-title white">замороженные полуфабрикаты</div>
-                </div>
-                <div class="main-catalog__item-svg">
-                    <div class="button button-arrow_right btn-hover_parent">
-                        <div class="btn-hover_circle total-white"></div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
-                            <path d="M1.77881 11.6197C1.77881 11.2055 2.1146 10.8697 2.52881 10.8697L12.7788 10.8697L12.7788 8.75503C12.7788 6.47297 15.398 5.18387 17.2063 6.57591L20.9276 9.44056C22.3576 10.5414 22.3576 12.698 20.9276 13.7988L17.2063 16.6634C15.398 18.0555 12.7788 16.7664 12.7788 14.4843L12.7788 12.3697L2.52881 12.3697C2.1146 12.3697 1.77881 12.0339 1.77881 11.6197Z" fill="#0068FF"></path>
-                        </svg>
-                    </div>
-                </div>
-            </a><a class="main-catalog__item btn-hover_parent" href="#">
-                <div class="main-catalog__item-bg desktop">
-                    <picture class="picture">
-                        <source type="image/webp" srcset="assets/images/main-catalog-item-bg3.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg3.png">
-                    </picture>
-                </div>
-                <div class="main-catalog__item-bg mobile">
-                    <picture class="picture">
-                        <source type="image/webp" srcset="assets/images/main-catalog-item-bg3-mobile.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg3-mobile.png">
-                    </picture>
-                </div>
-                <div class="main-catalog__item-row">
-                    <div class="main-catalog__item-title blue">дистрибуция</div>
-                </div>
-                <div class="main-catalog__item-svg">
-                    <div class="button button-arrow_right btn-hover_parent">
-                        <div class="btn-hover_circle total-white"></div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none">
-                            <path d="M1.77881 11.6197C1.77881 11.2055 2.1146 10.8697 2.52881 10.8697L12.7788 10.8697L12.7788 8.75503C12.7788 6.47297 15.398 5.18387 17.2063 6.57591L20.9276 9.44056C22.3576 10.5414 22.3576 12.698 20.9276 13.7988L17.2063 16.6634C15.398 18.0555 12.7788 16.7664 12.7788 14.4843L12.7788 12.3697L2.52881 12.3697C2.1146 12.3697 1.77881 12.0339 1.77881 11.6197Z" fill="#0068FF"></path>
-                        </svg>
-                    </div>
-                </div>
-            </a></div>
+        <?$APPLICATION->IncludeComponent(
+            "bitrix:catalog.section.list",
+            "main_catalog",
+            array(
+                "ADDITIONAL_COUNT_ELEMENTS_FILTER" => "additionalCountFilter",
+                "ADD_SECTIONS_CHAIN" => "Y",
+                "CACHE_FILTER" => "N",
+                "CACHE_GROUPS" => "Y",
+                "CACHE_TIME" => "36000000",
+                "CACHE_TYPE" => "A",
+                "COUNT_ELEMENTS" => "N",
+                "COUNT_ELEMENTS_FILTER" => "CNT_ACTIVE",
+                "FILTER_NAME" => "sectionsFilter",
+                "HIDE_SECTIONS_WITH_ZERO_COUNT_ELEMENTS" => "N",
+                "IBLOCK_ID" => "2",
+                "IBLOCK_TYPE" => "content",
+                "SECTION_CODE" => "",
+                "SECTION_FIELDS" => array(
+                    0 => "CODE",
+                    1 => "NAME",
+                    2 => "PICTURE",
+                    3 => "DETAIL_PICTURE",
+                    4 => "",
+                ),
+                "SECTION_ID" => $_REQUEST["SECTION_ID"],
+                "SECTION_URL" => "",
+                "SECTION_USER_FIELDS" => array(
+                    0 => "UF_FONTCOLOR",
+                    1 => "",
+                ),
+                "SHOW_PARENT_NAME" => "Y",
+                "TOP_DEPTH" => "1",
+                "VIEW_MODE" => "LINE",
+                "COMPONENT_TEMPLATE" => "main_catalog"
+            ),
+            false
+        );?>
     </section>
     <section class="main-news" data-aos="fade-up" data-aos-duration="1500">
         <? require_once ($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH."/include/pages/main/news_slider.php"); ?>

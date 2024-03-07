@@ -24,12 +24,11 @@ for($index = 0; $index < $itemSize; $index++)
 
     if($arResult[$index]["LINK"] <> "" && $index != $itemSize-1)
     {
-        $strReturn .= '<a class="breadcrumbs__item" href="'.$arResult[$index]["LINK"].'">'.$title.'</a>';
+        $strReturn .= ''.$arrow.'<a class="breadcrumbs__item" href="'.$arResult[$index]["LINK"].'">'.$title.'</a>';
     }
     else
     {
-        $strReturn .= ''.$arrow.'
-			<div class="breadcrumbs__current active">'.$title.'</div>';
+        $strReturn .= ''.$arrow.'<div class="breadcrumbs__current active">'.$title.'</div>';
     }
 }
 

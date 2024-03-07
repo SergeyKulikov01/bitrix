@@ -11,232 +11,41 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-
-$arViewModeList = $arResult['VIEW_MODE_LIST'];
-
-$arViewStyles = array(
-	'LIST' => array(
-		'CONT' => 'bx_sitemap',
-		'TITLE' => 'bx_sitemap_title',
-		'LIST' => 'bx_sitemap_ul',
-	),
-	'LINE' => array(
-		'CONT' => 'bx_catalog_line',
-		'TITLE' => 'bx_catalog_line_category_title',
-		'LIST' => 'bx_catalog_line_ul',
-		'EMPTY_IMG' => $this->GetFolder().'/images/line-empty.png'
-	),
-	'TEXT' => array(
-		'CONT' => 'bx_catalog_text',
-		'TITLE' => 'bx_catalog_text_category_title',
-		'LIST' => 'bx_catalog_text_ul'
-	),
-	'TILE' => array(
-		'CONT' => 'bx_catalog_tile',
-		'TITLE' => 'bx_catalog_tile_category_title',
-		'LIST' => 'bx_catalog_tile_ul',
-		'EMPTY_IMG' => $this->GetFolder().'/images/tile-empty.png'
-	)
-);
-$arCurView = $arViewStyles[$arParams['VIEW_MODE']];
-
-$strSectionEdit = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "SECTION_EDIT");
-$strSectionDelete = CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "SECTION_DELETE");
-$arSectionDeleteParams = array("CONFIRM" => GetMessage('CT_BCSL_ELEMENT_DELETE_CONFIRM'));
-
-?><div class="<? echo $arCurView['CONT']; ?>"><?
-if ('Y' == $arParams['SHOW_PARENT_NAME'] && 0 < $arResult['SECTION']['ID'])
-{
-	$this->AddEditAction($arResult['SECTION']['ID'], $arResult['SECTION']['EDIT_LINK'], $strSectionEdit);
-	$this->AddDeleteAction($arResult['SECTION']['ID'], $arResult['SECTION']['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
-
-	?><h1
-		class="<? echo $arCurView['TITLE']; ?>"
-		id="<? echo $this->GetEditAreaId($arResult['SECTION']['ID']); ?>"
-	><a href="<? echo $arResult['SECTION']['SECTION_PAGE_URL']; ?>"><?
-		echo (
-			isset($arResult['SECTION']["IPROPERTY_VALUES"]["SECTION_PAGE_TITLE"]) && $arResult['SECTION']["IPROPERTY_VALUES"]["SECTION_PAGE_TITLE"] != ""
-			? $arResult['SECTION']["IPROPERTY_VALUES"]["SECTION_PAGE_TITLE"]
-			: $arResult['SECTION']['NAME']
-		);
-	?></a></h1><?
-}
-if (0 < $arResult["SECTIONS_COUNT"])
-{
 ?>
-<ul class="<? echo $arCurView['LIST']; ?>">
-<?
-	switch ($arParams['VIEW_MODE'])
-	{
-		case 'LINE':
-			foreach ($arResult['SECTIONS'] as &$arSection)
-			{
-				$this->AddEditAction($arSection['ID'], $arSection['EDIT_LINK'], $strSectionEdit);
-				$this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
 
-				if (false === $arSection['PICTURE'])
-					$arSection['PICTURE'] = array(
-						'SRC' => $arCurView['EMPTY_IMG'],
-						'ALT' => (
-							'' != $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_ALT"]
-							? $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_ALT"]
-							: $arSection["NAME"]
-						),
-						'TITLE' => (
-							'' != $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_TITLE"]
-							? $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_TITLE"]
-							: $arSection["NAME"]
-						)
-					);
-				?><li id="<? echo $this->GetEditAreaId($arSection['ID']); ?>">
-				<a
-					href="<? echo $arSection['SECTION_PAGE_URL']; ?>"
-					class="bx_catalog_line_img"
-					style="background-image: url('<? echo $arSection['PICTURE']['SRC']; ?>');"
-					title="<? echo $arSection['PICTURE']['TITLE']; ?>"
-				></a>
-				<h2 class="bx_catalog_line_title"><a href="<? echo $arSection['SECTION_PAGE_URL']; ?>"><? echo $arSection['NAME']; ?></a><?
-				if ($arParams["COUNT_ELEMENTS"] && $arSection['ELEMENT_CNT'] !== null)
-				{
-					?> <span>(<? echo $arSection['ELEMENT_CNT']; ?>)</span><?
-				}
-				?></h2><?
-				if ('' != $arSection['DESCRIPTION'])
-				{
-					?><p class="bx_catalog_line_description"><? echo $arSection['DESCRIPTION']; ?></p><?
-				}
-				?><div style="clear: both;"></div>
-				</li><?
-			}
-			unset($arSection);
-			break;
-		case 'TEXT':
-			foreach ($arResult['SECTIONS'] as &$arSection)
-			{
-				$this->AddEditAction($arSection['ID'], $arSection['EDIT_LINK'], $strSectionEdit);
-				$this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
+<div class="main-catalog__top" data-aos="fade-up" data-aos-duration="1500">
+    <h2 class="main-catalog__title"><? $APPLICATION->ShowTitle() ?></h2>
+    <div class="title-rombs">
+        <div class="title-rombs__item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
+                <path d="M0.676674 9.3773C3.7119 9.6279 10.0934 11.1315 10.6292 19.3385C10.6659 19.9153 9.97245 20.222 9.562 19.8116L0.192768 10.4445C-0.22201 10.0297 0.0955527 9.32977 0.676674 9.3773Z" fill="#F64653"></path>
+                <path d="M10.6226 0.673481C10.372 3.70871 8.86846 10.0902 0.661469 10.626C0.0846682 10.6627 -0.222082 9.96926 0.188375 9.5588L9.55544 0.189576C9.97022 -0.227362 10.6701 0.0923602 10.6226 0.673481Z" fill="#F64653"></path>
+                <path d="M19.3243 9.3773C16.289 9.6279 9.90752 11.1315 9.37176 19.3385C9.33504 19.9153 10.0285 20.222 10.4389 19.8116L19.8082 10.4445C20.2229 10.0297 19.9054 9.32977 19.3243 9.3773Z" fill="#F64653"></path>
+                <path d="M9.37828 0.673481C9.62671 3.70871 11.1325 10.0902 19.3395 10.626C19.9163 10.6627 20.223 9.96926 19.8125 9.5588L10.4455 0.189576C10.0307 -0.227362 9.33075 0.0923602 9.37828 0.673481Z" fill="#F64653"></path>
+            </svg></div>
+        <div class="title-rombs__item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 20 20" fill="none">
+                <path d="M0.676674 9.3773C3.7119 9.6279 10.0934 11.1315 10.6292 19.3385C10.6659 19.9153 9.97245 20.222 9.562 19.8116L0.192768 10.4445C-0.22201 10.0297 0.0955527 9.32977 0.676674 9.3773Z" fill="#F64653"></path>
+                <path d="M10.6226 0.673481C10.372 3.70871 8.86846 10.0902 0.661469 10.626C0.0846682 10.6627 -0.222082 9.96926 0.188375 9.5588L9.55544 0.189576C9.97022 -0.227362 10.6701 0.0923602 10.6226 0.673481Z" fill="#F64653"></path>
+                <path d="M19.3243 9.3773C16.289 9.6279 9.90752 11.1315 9.37176 19.3385C9.33504 19.9153 10.0285 20.222 10.4389 19.8116L19.8082 10.4445C20.2229 10.0297 19.9054 9.32977 19.3243 9.3773Z" fill="#F64653"></path>
+                <path d="M9.37828 0.673481C9.62671 3.70871 11.1325 10.0902 19.3395 10.626C19.9163 10.6627 20.223 9.96926 19.8125 9.5588L10.4455 0.189576C10.0307 -0.227362 9.33075 0.0923602 9.37828 0.673481Z" fill="#F64653"></path>
+            </svg></div>
+    </div>
+</div>
 
-				?><li id="<? echo $this->GetEditAreaId($arSection['ID']); ?>"><h2 class="bx_catalog_text_title"><a href="<? echo $arSection['SECTION_PAGE_URL']; ?>"><? echo $arSection['NAME']; ?></a><?
-				if ($arParams["COUNT_ELEMENTS"] && $arSection['ELEMENT_CNT'] !== null)
-				{
-					?> <span>(<? echo $arSection['ELEMENT_CNT']; ?>)</span><?
-				}
-				?></h2></li><?
-			}
-			unset($arSection);
-			break;
-		case 'TILE':
-			foreach ($arResult['SECTIONS'] as &$arSection)
-			{
-				$this->AddEditAction($arSection['ID'], $arSection['EDIT_LINK'], $strSectionEdit);
-				$this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
-
-				if (false === $arSection['PICTURE'])
-					$arSection['PICTURE'] = array(
-						'SRC' => $arCurView['EMPTY_IMG'],
-						'ALT' => (
-							'' != $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_ALT"]
-							? $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_ALT"]
-							: $arSection["NAME"]
-						),
-						'TITLE' => (
-							'' != $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_TITLE"]
-							? $arSection["IPROPERTY_VALUES"]["SECTION_PICTURE_FILE_TITLE"]
-							: $arSection["NAME"]
-						)
-					);
-				?><li id="<? echo $this->GetEditAreaId($arSection['ID']); ?>">
-				<a
-					href="<? echo $arSection['SECTION_PAGE_URL']; ?>"
-					class="bx_catalog_tile_img"
-					style="background-image:url('<? echo $arSection['PICTURE']['SRC']; ?>');"
-					title="<? echo $arSection['PICTURE']['TITLE']; ?>"
-					> </a><?
-				if ('Y' != $arParams['HIDE_SECTION_NAME'])
-				{
-					?><h2 class="bx_catalog_tile_title"><a href="<? echo $arSection['SECTION_PAGE_URL']; ?>"><? echo $arSection['NAME']; ?></a><?
-					if ($arParams["COUNT_ELEMENTS"] && $arSection['ELEMENT_CNT'] !== null)
-					{
-						?> <span>(<? echo $arSection['ELEMENT_CNT']; ?>)</span><?
-					}
-				?></h2><?
-				}
-				?></li><?
-			}
-			unset($arSection);
-			break;
-		case 'LIST':
-			$intCurrentDepth = 1;
-			$boolFirst = true;
-			foreach ($arResult['SECTIONS'] as &$arSection)
-			{
-				$this->AddEditAction($arSection['ID'], $arSection['EDIT_LINK'], $strSectionEdit);
-				$this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
-
-				if ($intCurrentDepth < $arSection['RELATIVE_DEPTH_LEVEL'])
-				{
-					if (0 < $intCurrentDepth)
-						echo "\n",str_repeat("\t", $arSection['RELATIVE_DEPTH_LEVEL']),'<ul>';
-				}
-				elseif ($intCurrentDepth == $arSection['RELATIVE_DEPTH_LEVEL'])
-				{
-					if (!$boolFirst)
-						echo '</li>';
-				}
-				else
-				{
-					while ($intCurrentDepth > $arSection['RELATIVE_DEPTH_LEVEL'])
-					{
-						echo '</li>',"\n",str_repeat("\t", $intCurrentDepth),'</ul>',"\n",str_repeat("\t", $intCurrentDepth-1);
-						$intCurrentDepth--;
-					}
-					echo str_repeat("\t", $intCurrentDepth-1),'</li>';
-				}
-
-				echo (!$boolFirst ? "\n" : ''),str_repeat("\t", $arSection['RELATIVE_DEPTH_LEVEL']);
-				?><li id="<?=$this->GetEditAreaId($arSection['ID']);?>"><h2 class="bx_sitemap_li_title"><a href="<? echo $arSection["SECTION_PAGE_URL"]; ?>"><? echo $arSection["NAME"];?><?
-				if ($arParams["COUNT_ELEMENTS"] && $arSection['ELEMENT_CNT'] !== null)
-				{
-					?> <span>(<? echo $arSection["ELEMENT_CNT"]; ?>)</span><?
-				}
-				?></a></h2><?
-
-				$intCurrentDepth = $arSection['RELATIVE_DEPTH_LEVEL'];
-				$boolFirst = false;
-			}
-			unset($arSection);
-			while ($intCurrentDepth > 1)
-			{
-				echo '</li>',"\n",str_repeat("\t", $intCurrentDepth),'</ul>',"\n",str_repeat("\t", $intCurrentDepth-1);
-				$intCurrentDepth--;
-			}
-			if ($intCurrentDepth > 0)
-			{
-				echo '</li>',"\n";
-			}
-			break;
-	}
-?>
-</ul>
-<?
-	echo ('LINE' != $arParams['VIEW_MODE'] ? '<div style="clear: both;"></div>' : '');
-}
-?></div>
-
-<? foreach ($arResult['SECTIONS'] as $arSection) ?>
-<a class="main-catalog__item btn-hover_parent" href="#">
+<div class="main-catalog__list" data-aos="fade-up" data-aos-duration="1500">
+<? foreach ($arResult['SECTIONS'] as $arSection): ?>
+<a class="main-catalog__item btn-hover_parent" href="<?=$arSection["SECTION_PAGE_URL"]."/"?>">
     <div class="main-catalog__item-bg desktop">
         <picture class="picture">
-            <source type="image/webp" srcset="assets/images/main-catalog-item-bg1.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg1.png">
+            <source type="image/webp" srcset="<?=$arSection["desktop_path"]?>"><img class="picture__img" src="<?=$arSection["desktop_path"]?>">
         </picture>
     </div>
     <div class="main-catalog__item-bg mobile">
         <picture class="picture">
-            <source type="image/webp" srcset="assets/images/main-catalog-item-bg1-mobile.webp"><img class="picture__img" src="assets/images/main-catalog-item-bg1-mobile.png">
+            <source type="image/webp" srcset="<?=$arSection["mobile_path"]?>"><img class="picture__img" src="<?=$arSection["mobile_path"]?>">
         </picture>
     </div>
     <div class="main-catalog__item-row">
-        <div class="main-catalog__item-title "><? echo $arResult["SECTIONS"][0]["NAME"]?></div>
+        <div class="main-catalog__item-title <? if ($arSection["UF_FONTCOLOR"] == 2){ echo "blue";} else {echo "white";} ?>"><?=$arSection["NAME"]?></div>
     </div>
     <div class="main-catalog__item-svg">
         <div class="button button-arrow_right btn-hover_parent">
@@ -246,7 +55,8 @@ if (0 < $arResult["SECTIONS_COUNT"])
         </div>
     </div>
 </a>
+<? endforeach; ?>
+</div>
 
-
-
+<pre><? print_r($_REQUEST) ?></pre>
 <pre><? print_r($arResult) ?></pre>
