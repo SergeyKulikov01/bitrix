@@ -8,8 +8,10 @@
     while($ar_fields = $sections->GetNext())
     {
         $arResult['SECTIONS'][] =  $ar_fields;
+        $arr[$ar_fields['ID']] =  $ar_fields['NAME'];
     }
-    
+    $arResult['section_names'] = $arr;
+
     foreach ($arResult['ITEMS'] as $key => $arItems){
         $file = CFile::ResizeImageGet($arItems["PREVIEW_PICTURE"]['ID'], array('width'=>1200, 'height'=>800), BX_RESIZE_IMAGE_EXACT, false);
 		$arResult['ITEMS'][$key]['photo_path'] = $file['src'];

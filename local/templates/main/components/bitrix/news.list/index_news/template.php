@@ -13,6 +13,10 @@
 $this->setFrameMode(true);
 ?>
 
+<? if (isset($_REQUEST["CODE"])){
+    require_once($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . "/include/pages/news/detail_news.php");
+}else { ?>
+
 <div class="news-content__categories" data-aos="fade-up">
     <div class="news-content__categories-wrapper">
         <a class="news-content__categories-item <? if ($arResult["SECTION"] == ''){echo "active";}?> btn-hover_parent no-scale" href="/news/">
@@ -27,7 +31,7 @@ $this->setFrameMode(true);
 </div>
 <div class="news-content__listing" data-aos="fade-up">
     <?foreach($arResult["ITEMS"] as $arItem):?>
-    <a class="news-card" href="#">
+    <a class="news-card" href="<?=$arItem["DETAIL_PAGE_URL"]?>">
         <div class="news-card__top">
             <? if (isset($arItem["SECTION_NAME"])):?>
             <div class="news-card__plug"><?=$arItem["SECTION_NAME"]?></div>
@@ -48,3 +52,4 @@ $this->setFrameMode(true);
 <? if ($arResult["NAV_RESULT"]->result->num_rows < $arResult["NAV_RESULT"]->NavRecordCount){
     echo $arResult["NAV_STRING"];
 }; ?>
+<? }?>
