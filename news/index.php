@@ -149,7 +149,4 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
         </div>
     </div>
 
-
-<pre><? print_r($_REQUEST) ?></pre>
-
 <br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
