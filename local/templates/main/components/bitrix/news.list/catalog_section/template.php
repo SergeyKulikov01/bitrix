@@ -12,11 +12,8 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
-if (isset($arResult["SECTION"]["PATH"][1]["NAME"])){
-    $APPLICATION->SetTitle($arResult["SECTION"]["PATH"][1]["NAME"]);
-} else {
-    $APPLICATION->SetTitle($arResult["SECTION"]["PATH"][0]["NAME"]);
-}
+$APPLICATION->SetTitle($arResult["SECTION"]["NAME"]);
+$APPLICATION->AddChainItem($arResult["SECTION"]["NAME"])
 ?>
 
 
@@ -60,11 +57,11 @@ if (isset($arResult["SECTION"]["PATH"][1]["NAME"])){
         </div>
     </div>
     <div class="catalog-hero__thumbs">
-        <div class="catalog-hero__thumbs-item btn-hover_parent <? if ($arResult["SECTION"]["PATH"][1]["CODE"] == $arItem["CODE"]){echo "active";}?>">
-            <a href="/catalog/<?=$arResult["SECTION"]["PATH"][0]["CODE"]?>/"><div class="btn-hover_circle"></div><span>Все</span></a>
+        <div class="catalog-hero__thumbs-item btn-hover_parent <? if ($arResult["SECTION"]["CODE"] == $arResult["MAIN_SECTION"]["CODE"]){echo "active";}?>">
+            <a href="<?=$arResult["MAIN_SECTION"]["SECTION_PAGE_URL"]?>"><div class="btn-hover_circle"></div><span>Все</span></a>
         </div>
         <?foreach($arResult["SECTIONS"] as $arItem):?>
-            <div class="catalog-hero__thumbs-item btn-hover_parent <? if ($arResult["SECTION"]["PATH"][1]["CODE"] == $arItem["CODE"]){echo "active";}?>">
+            <div class="catalog-hero__thumbs-item btn-hover_parent <? if ($arResult["SECTION"]["CODE"] == $arItem["CODE"]){echo "active";}?>">
                 <a href="<?=$arItem['SECTION_PAGE_URL']?>"><div class="btn-hover_circle"></div><span><?=$arItem['NAME']?></span></a>
             </div>
         <?endforeach;?>

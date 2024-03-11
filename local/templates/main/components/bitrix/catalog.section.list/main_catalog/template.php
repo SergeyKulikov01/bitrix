@@ -33,7 +33,7 @@ $this->setFrameMode(true);
 
 <div class="main-catalog__list" data-aos="fade-up" data-aos-duration="1500">
 <? foreach ($arResult['SECTIONS'] as $arSection): ?>
-<a class="main-catalog__item btn-hover_parent" href="<?=$arSection["SECTION_PAGE_URL"]."/"?>">
+<a class="main-catalog__item btn-hover_parent" href="<?=$arSection["SECTION_PAGE_URL"]?>">
     <div class="main-catalog__item-bg desktop">
         <picture class="picture">
             <source type="image/webp" srcset="<?=$arSection["desktop_path"]?>"><img class="picture__img" src="<?=$arSection["desktop_path"]?>">
