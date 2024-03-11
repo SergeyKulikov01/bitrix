@@ -12,7 +12,7 @@
     }
 
     foreach ($arResult['ITEMS'] as $key => $arItems){
-        $file = CFile::ResizeImageGet($arItems["PREVIEW_PICTURE"]['ID'], array('width'=>310, 'height'=>310), BX_RESIZE_IMAGE_EXACT, false);
+        $file = CFile::ResizeImageGet($arItems["PREVIEW_PICTURE"]['ID'], array('width'=>310, 'height'=>310), BX_RESIZE_IMAGE_PROPORTIONAL, false);
 		$arResult['ITEMS'][$key]['photo_path'] = $file['src'];
         if (isset($arItems['IBLOCK_SECTION_ID'])) {
             $arResult['ITEMS'][$key]['SECTION_NAME'] = $arResult['section_names'][$arItems['IBLOCK_SECTION_ID']];

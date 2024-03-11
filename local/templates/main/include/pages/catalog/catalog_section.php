@@ -50,7 +50,7 @@
 			3 => "CNT_IN_BOX",
 			4 => "",
 		),
-		"SET_BROWSER_TITLE" => "N",
+		"SET_BROWSER_TITLE" => "Y",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "Y",
 		"SET_META_KEYWORDS" => "Y",
