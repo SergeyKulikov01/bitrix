@@ -1,4 +1,7 @@
-<?$APPLICATION->IncludeComponent(
+<?
+$dir = $APPLICATION->GetCurDir();
+$path = explode("/",$dir);
+$APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"catalog_section", 
 	array(
@@ -41,16 +44,13 @@
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Новости",
 		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => $_REQUEST["SECTION_CODE"],
+		"PARENT_SECTION_CODE" => $path[2],
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"PROPERTY_CODE" => array(
-			0 => "WEIGHT",
-			1 => "icons",
-			2 => "BOXES",
-			3 => "CNT_IN_BOX",
-			4 => "",
+			0 => "",
+			1 => "",
 		),
-		"SET_BROWSER_TITLE" => "Y",
+		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "Y",
 		"SET_META_KEYWORDS" => "Y",

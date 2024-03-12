@@ -19,7 +19,11 @@
 
 
 
-<?$APPLICATION->IncludeComponent("bitrix:news.detail", "catalog_detail", Array(
+<?
+$dir = $APPLICATION->GetCurDir();
+$path = explode("/",$dir);
+
+$APPLICATION->IncludeComponent("bitrix:news.detail", "catalog_detail", Array(
     "ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
     "ADD_ELEMENT_CHAIN" => "N",	// Включать название элемента в цепочку навигации
     "ADD_SECTIONS_CHAIN" => "Y",	// Включать раздел в цепочку навигации
@@ -40,7 +44,7 @@
     "DISPLAY_PICTURE" => "Y",	// Выводить детальное изображение
     "DISPLAY_PREVIEW_TEXT" => "Y",	// Выводить текст анонса
     "DISPLAY_TOP_PAGER" => "N",	// Выводить над списком
-    "ELEMENT_CODE" => $_REQUEST["CODE"],	// Код новости
+    "ELEMENT_CODE" => $path[3],	// Код новости
     "ELEMENT_ID" => "",	// ID новости
     "FIELD_CODE" => array(	// Поля
         0 => "",

@@ -13,7 +13,10 @@
 $this->setFrameMode(true);
 
 $APPLICATION->SetTitle($arResult["SECTION"]["NAME"]);
-$APPLICATION->AddChainItem($arResult["SECTION"]["NAME"])
+$APPLICATION->AddChainItem($arResult["MAIN_SECTION"]["NAME"]);
+if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]){
+    $APPLICATION->AddChainItem($arResult["SECTION"]["NAME"]);
+}
 ?>
 
 
@@ -232,3 +235,4 @@ $APPLICATION->AddChainItem($arResult["SECTION"]["NAME"])
 <? if ($arResult["NAV_RESULT"]->result->num_rows < $arResult["NAV_RESULT"]->NavRecordCount){
     echo $arResult["NAV_STRING"];
 }; ?>
+<pre><? print_r($arResult) ?></pre>

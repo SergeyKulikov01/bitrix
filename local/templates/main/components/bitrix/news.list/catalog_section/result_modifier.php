@@ -1,4 +1,7 @@
 <?php
+$dir = $APPLICATION->GetCurDir();
+$path = explode("/",$dir);
+
     $arResult['MAIN_SECTION'] = $arResult['SECTION']['PATH'][0];
     $sections = CIBlockSection::GetList (
         Array("sort" => "ASC"),
@@ -12,7 +15,7 @@
     }
     $section = CIBlockSection::GetList (
     Array("sort" => "ASC"),
-    Array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y" , "CODE" => $arParams['SECTION_CODE'] = $_REQUEST['SECTION_CODE']),
+    Array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y" , "CODE" => $arParams['SECTION_CODE'] = $path[2]),
     false,
     Array('ID', 'NAME', 'SECTION_PAGE_URL', 'CODE')
 );
@@ -20,7 +23,6 @@
     {
         $arResult['SECTION'] =  $ar_fields;
     }
-
     foreach ($arResult['ITEMS'] as $key => $arItems){
         $file = CFile::ResizeImageGet($arItems["PREVIEW_PICTURE"]['ID'], array('width'=>310, 'height'=>310), BX_RESIZE_IMAGE_PROPORTIONAL, false);
 		$arResult['ITEMS'][$key]['photo_path'] = $file['src'];
