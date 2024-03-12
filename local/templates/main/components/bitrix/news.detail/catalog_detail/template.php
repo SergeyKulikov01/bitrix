@@ -329,4 +329,3 @@ $this->setFrameMode(true);
             </a>
         </div>
     </div>
-<pre><? print_r($arResult) ?></pre>
