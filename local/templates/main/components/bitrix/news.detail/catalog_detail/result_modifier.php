@@ -18,7 +18,7 @@
         $arResult['storage_cond'][$arItems] = $arResult['PROPERTIES']['storage_cond_desc']['VALUE'][$key];
     }
     foreach ($arResult['PROPERTIES']['nutritional_value']['VALUE'] as $key => $arItems){
-        $arResult['nutritional'][$arItems] = $arResult['PROPERTIES']['nutritional_value_desc']['VALUE'][$key];
+        $arResult['nutritional'][$arItems] = $arResult['PROPERTIES']['nutritional_value']['DESCRIPTION'][$key];
     }
 
     foreach ($arResult['PROPERTIES']['photo_slider']['VALUE'] as $key => $arItems){

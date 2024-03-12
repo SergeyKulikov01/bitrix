@@ -17,10 +17,13 @@ $APPLICATION->AddChainItem($arResult["MAIN_SECTION"]["NAME"]);
 if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]){
     $APPLICATION->AddChainItem($arResult["SECTION"]["NAME"]);
 }
+
+use Bitrix\Main\Application;
+use Bitrix\Main\Web\Cookie;
+$cookie = new Cookie('Sort', $_REQUEST["sort"]);
+Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
+
 ?>
-
-
-
 
 <section class="catalog-hero top-section container">
     <div class="catalog-hero__breadcrumbs">
@@ -69,7 +72,7 @@ if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]){
             </div>
         <?endforeach;?>
     </div>
-    <div class="catalog-hero__activity" data-aos="fade-up"><label class="catalog-hero__tops desktop" for="top"><input class="catalog-hero__tops-input catalog-check-desktop" type="checkbox" name="top" id="top">
+    <form class="catalog-hero__activity" data-aos="fade-up"><label class="catalog-hero__tops desktop" for="top"><input class="catalog-hero__tops-input catalog-check-desktop" type="checkbox" name="top" value="Y" id="top" <? if ($_REQUEST["top"] == "Y"){ echo "checked"; }; ?> >
             <div class="catalog-hero__tops-box"><svg class="mark-svg" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewbox="0 0 14 10" fill="none">
                     <path d="M1 5L5 9L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg></div>
@@ -82,21 +85,27 @@ if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]){
             <div class="catalog-hero__tops-text">Топ продаж</div>
         </label>
         <div class="catalog-hero__selects">
+            <? if (isset($arResult["FILTER_LIST"])):?>
             <div class="catalog-hero__select desktop">
                 <div class="select-wrapper">
-                    <div class="select"><select class="select__select" style="width: 100%" data-select-placeholder="Степень готовности">
+                    <div class="select">
+                        <select class="select__select" style="width: 100%" data-select-placeholder="Бренд" name="brand">
                             <option value="" selected="selected" disabled="disabled"></option>
-                            <option value="Сёмыч">Сёмыч</option>
-                            <option value="Ладушка">Ладушка</option>
-                        </select></div>
+                            <?foreach($arResult["FILTER_LIST"] as $key => $item):?>
+                            <option value="<?=$key?>" <? if ($_REQUEST["brand"] == $key){ echo "selected"; }; ?> ><?=$item?></option>
+                            <?endforeach;?>
+                        </select>
+                    </div>
                 </div>
             </div>
+            <? endif;?>
             <div class="catalog-hero__select desktop">
                 <div class="select-wrapper">
-                    <div class="select"><select class="select__select" style="width: 100%" data-select-placeholder="Тесто">
+                    <div class="select"><select class="select__select" style="width: 100%" data-select-placeholder="Тесто" name="fat">
                             <option value="" selected="selected" disabled="disabled"></option>
-                            <option value="Жирность1">Жирность1</option>
-                            <option value="Жирность2">Жирность2</option>
+                            <?foreach($arResult["FAT_LIST"] as $key => $item):?>
+                            <option value="<?=$item?>" <? if ($_REQUEST["fat"] == $item){ echo "selected"; }; ?> ><?=$item?></option>
+                            <?endforeach;?>
                         </select></div>
                 </div>
             </div>
@@ -112,8 +121,8 @@ if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]){
                 <div class="select-wrapper">
                     <div class="select cstm-arrows"><select class="select__select" style="width: 100%" data-select-placeholder="Сначала новинки">
                             <option value="" selected="selected" disabled="disabled"></option>
-                            <option value="Сначала новинки">Сначала новинки</option>
-                            <option value="Сначала популярные">Сначала популярные</option>
+                            <option value="Сначала новинки" <? if ($_REQUEST["sort"] == "new"){ echo "selected"; }; ?> >Сначала новинки</option>
+                            <option value="Сначала популярные" <? if ($_REQUEST["sort"] == "popular"){ echo "selected"; }; ?> >Сначала популярные</option>
                         </select></div>
                 </div>
             </div>
@@ -125,7 +134,7 @@ if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]){
                 </svg></div>
             <div class="catalog-hero__reset-text">Сбросить</div>
         </div>
-    </div>
+    </form>
 </section>
 <section class="catalog-list container section-animation" data-aos="fade-up">
     <div class="catalog-list__inner">
@@ -235,4 +244,5 @@ if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]){
 <? if ($arResult["NAV_RESULT"]->result->num_rows < $arResult["NAV_RESULT"]->NavRecordCount){
     echo $arResult["NAV_STRING"];
 }; ?>
+<pre><? print_r($_REQUEST) ?></pre>
 <pre><? print_r($arResult) ?></pre>
