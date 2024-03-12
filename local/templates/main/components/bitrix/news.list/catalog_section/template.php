@@ -232,4 +232,3 @@ $APPLICATION->AddChainItem($arResult["SECTION"]["NAME"])
 <? if ($arResult["NAV_RESULT"]->result->num_rows < $arResult["NAV_RESULT"]->NavRecordCount){
     echo $arResult["NAV_STRING"];
 }; ?>
-<pre><? print_r($arResult) ?></pre>

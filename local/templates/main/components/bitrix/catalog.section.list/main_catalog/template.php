@@ -57,6 +57,3 @@ $this->setFrameMode(true);
 </a>
 <? endforeach; ?>
 </div>
-
-<pre><? print_r($_REQUEST) ?></pre>
-<pre><? print_r($arResult) ?></pre>
