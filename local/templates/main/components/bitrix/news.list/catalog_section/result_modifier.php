@@ -27,7 +27,7 @@
 
     $brands = CIBlockElement::GetList(
         false,
-        Array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y","SECTION_ID" => $arResult['SECTION']['ID'] ),
+        Array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y","SECTION_ID" => $arResult['SECTION']['ID']),
         Array("PROPERTY_brand"),
         false,
     );
@@ -71,7 +71,7 @@
     if ($_REQUEST['top'] != '' or $_REQUEST['brand'] != '' or $_REQUEST['fat'] != '') {
         unset($arResult["ITEMS"]);
         if ($_REQUEST['top'] == 'Y'){
-            $arrFilter['PROPERTY_TOP_VALUE'] = 'y';
+            $arrFilter['PROPERTY_ICONS_VALUE'] = 'top';
         }
         if ($_REQUEST['brand'] != ''){
             $arrFilter['PROPERTY_BRAND'] = $_REQUEST['brand'];
@@ -82,10 +82,10 @@
         $arResult['filter'] = $arrFilter;
         $filtered = CIBlockElement::GetList(
             false,
-            array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y", "SECTION_ID" => $arResult['SECTION']['ID'], $arrFilter),
+            array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y", "SECTION_ID" => $arResult['SECTION']['ID'], $arrFilter, "INCLUDE_SUBSECTIONS" => "Y" ),
             false,
             false,
-            Array("PREVIEW_PICTURE","NAME","PREVIEW_TEXT","DETAIL_PAGE_URL","PROPERTY_BOXES","PROPERTY_WEIGHT", "PROPERTY_CNT_IN_BOX",)
+            Array("PREVIEW_PICTURE","NAME","PREVIEW_TEXT","DETAIL_PAGE_URL","PROPERTY_BOXES","PROPERTY_WEIGHT", "PROPERTY_CNT_IN_BOX", "PROPERTY_ICONS")
         );
         while ($ar_fields = $filtered->GetNext()) {
             $arResult['ITEMS'][] = $ar_fields;
@@ -94,6 +94,7 @@
             $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["WEIGHT"]["DISPLAY_VALUE"] = $arItems["PROPERTY_WEIGHT_VALUE"];
             $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["BOXES"]["DISPLAY_VALUE"] = $arItems["PROPERTY_BOXES_VALUE"];
             $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["CNT_IN_BOX"]["DISPLAY_VALUE"] = $arItems["PROPERTY_CNT_IN_BOX_VALUE"];
+            $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["icons"]["VALUE"] = $arItems["PROPERTY_ICONS_VALUE"];
             $file = CFile::ResizeImageGet($arItems["PREVIEW_PICTURE"], array('width'=>310, 'height'=>310), BX_RESIZE_IMAGE_PROPORTIONAL, false);
             $arResult['ITEMS'][$key]['photo_path'] = $file['src'];
         }
