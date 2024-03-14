@@ -13,17 +13,15 @@
 $this->setFrameMode(true);
 
 $APPLICATION->SetTitle($arResult["SECTION"]["NAME"]);
-$APPLICATION->AddChainItem($arResult["MAIN_SECTION"]["NAME"]);
+$APPLICATION->AddChainItem($arResult["MAIN_SECTION"]["NAME"], $arResult["MAIN_SECTION"]["SECTION_PAGE_URL"]);
 if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]) {
-    $APPLICATION->AddChainItem($arResult["SECTION"]["NAME"]);
+    $APPLICATION->AddChainItem($arResult["SECTION"]["NAME"], $arResult["SECTION"]["SECTION_PAGE_URL"]);
 }
 
 use Bitrix\Main\Application;
-use Bitrix\Main\Web\Cookie;
 
-$cookie = new Cookie('Sort', $_REQUEST["sort"]);
-Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
-
+include_once($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . "/include/ajax/sort.php");
+echo Application::getInstance()->getContext()->getRequest()->getCookie("Sort");
 ?>
 
 <section class="catalog-hero top-section container">
@@ -96,13 +94,13 @@ Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
             <div class="catalog-hero__tops-text">Топ продаж</div>
         </label>
         <div class="catalog-hero__selects">
-            <? if (isset($arResult["FILTER_LIST"])) : ?>
+            <? if (isset($arResult["FILTER_LIST"]["BRAND"])) : ?>
                 <div class="catalog-hero__select desktop">
                     <div class="select-wrapper">
                         <div class="select">
                             <select class="select__select" style="width: 100%" data-select-placeholder="Бренд" name="brand">
                                 <option value="" selected="selected" disabled="disabled"></option>
-                                <? foreach ($arResult["FILTER_LIST"] as $key => $item) : ?>
+                                <? foreach ($arResult["FILTER_LIST"]["BRAND"] as $key => $item) : ?>
                                     <option value="<?= $key ?>" <? if ($_REQUEST["brand"] == $key) {
                                                                     echo "selected";
                                                                 }; ?>><?= $item ?></option>
@@ -112,18 +110,20 @@ Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
                     </div>
                 </div>
             <? endif; ?>
-            <div class="catalog-hero__select desktop">
-                <div class="select-wrapper">
-                    <div class="select"><select class="select__select" style="width: 100%" data-select-placeholder="Тесто" name="fat">
-                            <option value="" selected="selected" disabled="disabled"></option>
-                            <? foreach ($arResult["FAT_LIST"] as $key => $item) : ?>
-                                <option value="<?= $item ?>" <? if ($_REQUEST["fat"] == $item) {
-                                                                    echo "selected";
-                                                                }; ?>><?= $item ?></option>
-                            <? endforeach; ?>
-                        </select></div>
+            <? if (isset($arResult["FILTER_LIST"]["FAT"])) : ?>
+                <div class="catalog-hero__select desktop">
+                    <div class="select-wrapper">
+                        <div class="select"><select class="select__select" style="width: 100%" data-select-placeholder="Тесто" name="fat">
+                                <option value="" selected="selected" disabled="disabled"></option>
+                                <? foreach ($arResult["FILTER_LIST"]["FAT"] as $key => $item) : ?>
+                                    <option value="<?= $item ?>" <? if ($_REQUEST["fat"] == $item) {
+                                                                        echo "selected";
+                                                                    }; ?>><?= $item ?></option>
+                                <? endforeach; ?>
+                            </select></div>
+                    </div>
                 </div>
-            </div>
+            <? endif; ?>
             <div class="catalog-hero__filters mobile" data-popup="catalog-filters">
                 <div class="catalog-hero__filters-icon"><svg width="18" height="18" viewbox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.375 9H14.625" stroke="#0068FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -255,6 +255,12 @@ Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
                 </div>
             </a>
         <? endforeach; ?>
+        <? if (!isset($arResult["ITEMS"])) { ?>
+            <div class="search-results__empty" data-aos="fade-up">
+                <p class="search-results__empty-title">К сожалению, по вашему запросу ничего не найдено :(</p>
+                <p class="search-results__empty-desk">Скорректируйте ваш запрос или <a href="<? $arResult["MAIN_SECTION"]["SECTION_PAGE_URL"] ?>">перейдите в каталог</a></p>
+            </div>
+        <? } ?>
     </div>
     <div class="catalog-list__more btn-hover_parent">
         <div class="btn-hover_circle"></div><span>Показать еще</span>
@@ -263,3 +269,7 @@ Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
 <? if ($arResult["NAV_RESULT"]->result->num_rows < $arResult["NAV_RESULT"]->NavRecordCount) {
     echo $arResult["NAV_STRING"];
 }; ?>
+<script>
+
+</script>
+<pre><? print_r($arResult) ?></pre>

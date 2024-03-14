@@ -25,7 +25,7 @@ while ($ar_fields = $section->GetNext()) {
 
 $brands = CIBlockElement::GetList(
     false,
-    array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y", "SECTION_ID" => $arResult['SECTION']['ID']),
+    array("IBLOCK_ID" => $arResult['ID'], "ACTIVE" => "Y", "INCLUDE_SUBSECTIONS" => "Y", "SECTION_ID" => $arResult['SECTION']['ID']),
     array("PROPERTY_brand"),
     false,
 );
@@ -41,56 +41,32 @@ if ($brandIDS != '') {
         false,
     );
     while ($ar_fields = $filterList->GetNext()) {
-        $arResult["FILTER_LIST"][$ar_fields["ID"]] =  $ar_fields["NAME"];
+        $arResult["FILTER_LIST"]["BRAND"][$ar_fields["ID"]] =  $ar_fields["NAME"];
     }
 }
+if ($arResult["FILTER_LIST"]["BRAND"]) {
+    asort($arResult["FILTER_LIST"]["BRAND"]);
+}
+
 
 $fat = CIBlockElement::GetList(
     false,
-    array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y", "SECTION_ID" => $arResult['SECTION']['ID']),
+    array("IBLOCK_ID" => $arResult['ID'], "ACTIVE" => "Y", "SECTION_ID" => $arResult['SECTION']['ID'], "INCLUDE_SUBSECTIONS" => "Y"),
     array('PROPERTY_fat'),
     false,
     false,
 );
 while ($ar_fields = $fat->GetNext()) {
     if ($ar_fields["PROPERTY_FAT_VALUE"] != '') {
-        $arResult["FAT_LIST"][] = $ar_fields["PROPERTY_FAT_VALUE"];
+        $arResult["FILTER_LIST"]["FAT"][] = $ar_fields["PROPERTY_FAT_VALUE"];
     }
 }
+if ($arResult["FILTER_LIST"]["FAT"]) {
+    sort($arResult["FILTER_LIST"]["FAT"], SORT_NATURAL | SORT_FLAG_CASE);
+}
+
 
 foreach ($arResult['ITEMS'] as $key => $arItems) {
     $file = CFile::ResizeImageGet($arItems["PREVIEW_PICTURE"]["ID"], array('width' => 310, 'height' => 310), BX_RESIZE_IMAGE_PROPORTIONAL, false);
     $arResult['ITEMS'][$key]['photo_path'] = $file['src'];
-}
-
-if ($_REQUEST['top'] != '' or $_REQUEST['brand'] != '' or $_REQUEST['fat'] != '') {
-    unset($arResult["ITEMS"]);
-    if ($_REQUEST['top'] == 'Y') {
-        $arrFilter['PROPERTY_ICONS_VALUE'] = 'top';
-    }
-    if ($_REQUEST['brand'] != '') {
-        $arrFilter['PROPERTY_BRAND'] = $_REQUEST['brand'];
-    }
-    if ($_REQUEST['fat'] != '') {
-        $arrFilter['PROPERTY_FAT'] = $_REQUEST['fat'];
-    }
-    $arResult['filter'] = $arrFilter;
-    $filtered = CIBlockElement::GetList(
-        false,
-        array("IBLOCK_ID" => $arResult['ID'], "GLOBAL_ACTIVE" => "Y", "SECTION_ID" => $arResult['SECTION']['ID'], $arrFilter, "INCLUDE_SUBSECTIONS" => "Y"),
-        false,
-        false,
-        array("PREVIEW_PICTURE", "NAME", "PREVIEW_TEXT", "DETAIL_PAGE_URL", "PROPERTY_BOXES", "PROPERTY_WEIGHT", "PROPERTY_CNT_IN_BOX", "PROPERTY_ICONS")
-    );
-    while ($ar_fields = $filtered->GetNext()) {
-        $arResult['ITEMS'][] = $ar_fields;
-    }
-    foreach ($arResult['ITEMS'] as $key => $arItems) {
-        $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["WEIGHT"]["DISPLAY_VALUE"] = $arItems["PROPERTY_WEIGHT_VALUE"];
-        $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["BOXES"]["DISPLAY_VALUE"] = $arItems["PROPERTY_BOXES_VALUE"];
-        $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["CNT_IN_BOX"]["DISPLAY_VALUE"] = $arItems["PROPERTY_CNT_IN_BOX_VALUE"];
-        $arResult['ITEMS'][$key]["DISPLAY_PROPERTIES"]["icons"]["VALUE"] = $arItems["PROPERTY_ICONS_VALUE"];
-        $file = CFile::ResizeImageGet($arItems["PREVIEW_PICTURE"], array('width' => 310, 'height' => 310), BX_RESIZE_IMAGE_PROPORTIONAL, false);
-        $arResult['ITEMS'][$key]['photo_path'] = $file['src'];
-    }
 }

@@ -1,9 +1,34 @@
 <?
 $dir = $APPLICATION->GetCurDir();
-$path = explode("/",$dir);
+$path = explode("/", $dir);
+global $arrFilter;
+$arrFilter = [];
+if ($_REQUEST['brand'] != '') {
+	$arrFilter['PROPERTY_BRAND'] = $_REQUEST['brand'];
+}
+if ($_REQUEST['top'] == 'Y') {
+	$arrFilter['PROPERTY_ICONS_VALUE'] = 'top';
+}
+if ($_REQUEST['fat'] != '') {
+	$arrFilter['PROPERTY_FAT'] = $_REQUEST['fat'];
+}
+
+$arrSortBy;
+$arrOrderBy;
+
+use Bitrix\Main\Application;
+
+if (Application::getInstance()->getContext()->getRequest()->getCookie("Sort") == 'new') {
+	$arrSortBy = 'ID';
+	$arrOrderBy = 'DESC';
+}
+if (Application::getInstance()->getContext()->getRequest()->getCookie("Sort") == 'popular') {
+	$arrSortBy = 'show_counter';
+	$arrOrderBy = 'DESC';
+}
 $APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"catalog_section", 
+	"bitrix:news.list",
+	"catalog_section",
 	array(
 		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
@@ -25,10 +50,10 @@ $APPLICATION->IncludeComponent(
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"FIELD_CODE" => array(
-			0 => "",
+			0 => "SHOW_COUNTER",
 			1 => "",
 		),
-		"FILTER_NAME" => "",
+		"FILTER_NAME" => "arrFilter",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "2",
 		"IBLOCK_TYPE" => "content",
@@ -66,12 +91,12 @@ $APPLICATION->IncludeComponent(
 		"SET_STATUS_404" => "N",
 		"SET_TITLE" => "N",
 		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
+		"SORT_BY1" => $arrSortBy,
 		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
+		"SORT_ORDER1" => $arrOrderBy,
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
 		"COMPONENT_TEMPLATE" => "catalog_section"
 	),
 	false
-);?>
+);
