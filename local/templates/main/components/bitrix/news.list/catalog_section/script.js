@@ -17,44 +17,42 @@ document.addEventListener("DOMContentLoaded", function () {
   checkbox.addEventListener("change", function () {
     form.submit();
   });
-  const targetNodeFat = document.querySelector('select[name="fat"]');
-  const targetNodeBrand = document.querySelector('select[name="brand"]');
+  const selectFields = document.querySelectorAll(".select__select");
+  for (let selectField of selectFields) {
+    const targetNode = selectField;
+    let initialSelected = "unset";
+    const config = { attributes: true };
+
+    const observer = new MutationObserver((mutationsList, observer) => {
+      for (let mutation of mutationsList) {
+        if (mutation.attributeName === "data-select2-id") {
+          const optionValue = getValueOfSelectedOption(
+            mutation.target.querySelectorAll("option")
+          );
+          if (initialSelected === "unset") {
+            initialSelected = optionValue;
+          } else if (initialSelected != optionValue) {
+            observer.disconnect();
+            form.submit();
+          }
+        }
+      }
+    });
+    observer.observe(targetNode, config);
+    function getValueOfSelectedOption(options) {
+      for (const option of options) {
+        if (option.hasAttribute("data-select2-id")) {
+          return option.value;
+        }
+      }
+      return "";
+    }
+  }
+
   const targetNodeSort = document.querySelector('select[name="sort"]');
-  let initialSelected = "unset";
-  let initialSelectedBrand = "unset";
   let initialSelectedSort = "unset";
   const config = { attributes: true };
 
-  const observer = new MutationObserver((mutationsList, observer) => {
-    for (let mutation of mutationsList) {
-      if (mutation.attributeName === "data-select2-id") {
-        const optionValue = getValueOfSelectedOption(
-          mutation.target.querySelectorAll("option")
-        );
-        if (initialSelected === "unset") {
-          initialSelected = optionValue;
-        } else if (initialSelected != optionValue) {
-          observer.disconnect();
-          form.submit();
-        }
-      }
-    }
-  });
-  const observerBrand = new MutationObserver((mutationsList, observer) => {
-    for (let mutation of mutationsList) {
-      if (mutation.attributeName === "data-select2-id") {
-        const optionValue = getValueOfSelectedOption(
-          mutation.target.querySelectorAll("option")
-        );
-        if (initialSelectedBrand === "unset") {
-          initialSelectedBrand = optionValue;
-        } else if (initialSelectedBrand != optionValue) {
-          observer.disconnect();
-          form.submit();
-        }
-      }
-    }
-  });
   const observerSort = new MutationObserver((mutationsList, observer) => {
     for (let mutation of mutationsList) {
       if (mutation.attributeName === "data-select2-id") {
@@ -79,17 +77,5 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
-
-  observer.observe(targetNodeFat, config);
-  observerBrand.observe(targetNodeBrand, config);
   observerSort.observe(targetNodeSort, config);
-
-  function getValueOfSelectedOption(options) {
-    for (const option of options) {
-      if (option.hasAttribute("data-select2-id")) {
-        return option.value;
-      }
-    }
-    return "";
-  }
 });
