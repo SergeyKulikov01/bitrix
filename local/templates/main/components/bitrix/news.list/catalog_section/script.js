@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("Отправляемая JSON-строка:", jsonString);
           // Отправка запроса на сервер
           xhr.send(jsonString);
+
           form.submit();
         }
       }

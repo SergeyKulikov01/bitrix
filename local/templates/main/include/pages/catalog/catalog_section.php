@@ -18,6 +18,8 @@ $arrOrderBy;
 
 use Bitrix\Main\Application;
 
+$arrSortBy = 'ID';
+$arrOrderBy = 'DESC';
 if (Application::getInstance()->getContext()->getRequest()->getCookie("sort") == 'new') {
 	$arrSortBy = 'ID';
 	$arrOrderBy = 'DESC';
