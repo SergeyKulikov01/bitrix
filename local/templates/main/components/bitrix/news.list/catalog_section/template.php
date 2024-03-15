@@ -20,8 +20,8 @@ if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]) {
 
 use Bitrix\Main\Application;
 
-include_once($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . "/include/ajax/sort.php");
-echo Application::getInstance()->getContext()->getRequest()->getCookie("Sort");
+//include_once($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . "/include/ajax/sort.php");
+
 ?>
 
 <section class="catalog-hero top-section container">
@@ -79,9 +79,11 @@ echo Application::getInstance()->getContext()->getRequest()->getCookie("Sort");
             </div>
         <? endforeach; ?>
     </div>
-    <form class="catalog-hero__activity" data-aos="fade-up"><label class="catalog-hero__tops desktop" for="top"><input class="catalog-hero__tops-input catalog-check-desktop" type="checkbox" name="top" value="Y" id="top" <? if ($_REQUEST["top"] == "Y") {
-                                                                                                                                                                                                                                echo "checked";
-                                                                                                                                                                                                                            }; ?>>
+    <form class="catalog-hero__activity" data-aos="fade-up">
+        <label class="catalog-hero__tops desktop" for="top">
+            <input class="catalog-hero__tops-input catalog-check-desktop" type="checkbox" name="top" value="Y" id="top" <? if ($_REQUEST["top"] == "Y") {
+                                                                                                                            echo "checked";
+                                                                                                                        }; ?>>
             <div class="catalog-hero__tops-box"><svg class="mark-svg" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewbox="0 0 14 10" fill="none">
                     <path d="M1 5L5 9L13 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg></div>
@@ -113,14 +115,16 @@ echo Application::getInstance()->getContext()->getRequest()->getCookie("Sort");
             <? if (isset($arResult["FILTER_LIST"]["FAT"])) : ?>
                 <div class="catalog-hero__select desktop">
                     <div class="select-wrapper">
-                        <div class="select"><select class="select__select" style="width: 100%" data-select-placeholder="Тесто" name="fat">
+                        <div class="select">
+                            <select class="select__select" style="width: 100%" data-select-placeholder="Тесто" name="fat">
                                 <option value="" selected="selected" disabled="disabled"></option>
                                 <? foreach ($arResult["FILTER_LIST"]["FAT"] as $key => $item) : ?>
                                     <option value="<?= $item ?>" <? if ($_REQUEST["fat"] == $item) {
                                                                         echo "selected";
                                                                     }; ?>><?= $item ?></option>
                                 <? endforeach; ?>
-                            </select></div>
+                            </select>
+                        </div>
                     </div>
                 </div>
             <? endif; ?>
@@ -134,14 +138,16 @@ echo Application::getInstance()->getContext()->getRequest()->getCookie("Sort");
             </div>
             <div class="catalog-hero__select">
                 <div class="select-wrapper">
-                    <div class="select cstm-arrows"><select class="select__select" style="width: 100%" data-select-placeholder="Сначала новинки">
-                            <option value="" selected="selected" disabled="disabled"></option>
-                            <option value="Сначала новинки" <? if ($_REQUEST["sort"] == "new") {
-                                                                echo "selected";
-                                                            }; ?>>Сначала новинки</option>
-                            <option value="Сначала популярные" <? if ($_REQUEST["sort"] == "popular") {
-                                                                    echo "selected";
-                                                                }; ?>>Сначала популярные</option>
+                    <div class="select cstm-arrows"><select class="select__select" style="width: 100%" data-select-placeholder="Сначала новинки" name="sort">
+                            <option value="" selected="<? if (Application::getInstance()->getContext()->getRequest()->getCookie("sort")) {
+                                                            echo "selected";
+                                                        }; ?>" disabled="disabled"></option>
+                            <option value="new" <? if (Application::getInstance()->getContext()->getRequest()->getCookie("sort") == "new") {
+                                                    echo "selected";
+                                                }; ?>>Сначала новинки</option>
+                            <option value="popular" <? if (Application::getInstance()->getContext()->getRequest()->getCookie("sort") == "popular") {
+                                                        echo "selected";
+                                                    }; ?>>Сначала популярные</option>
                         </select></div>
                 </div>
             </div>
