@@ -3,27 +3,20 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector(".catalog-hero__reset")
     .addEventListener("click", function () {
-      // Находим форму по названию класса
-
       const selectFields = document.querySelectorAll(".select__select");
       const checkbox = document.querySelector('input[name="top"]');
       checkbox.checked = false;
-
       selectFields.forEach((selectField) => {
-        // Ваш код для обработки каждого поля select здесь
-        console.log(selectField.value); // Пример: выведет каждое найденное поле select
+        console.log(selectField.value);
         selectField.selectedIndex = 0;
       });
       form.submit();
     });
-  //
   const checkbox = document.querySelector('input[name="top"]');
   console.log(checkbox);
   checkbox.addEventListener("change", function () {
     form.submit();
   });
-  ///////////
-  const targetNode = document.querySelector(".select__select");
   const targetNodeFat = document.querySelector('select[name="fat"]');
   const targetNodeBrand = document.querySelector('select[name="brand"]');
   const targetNodeSort = document.querySelector('select[name="sort"]');
@@ -38,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const optionValue = getValueOfSelectedOption(
           mutation.target.querySelectorAll("option")
         );
-        console.log(`Fat value is: ${optionValue}`);
         if (initialSelected === "unset") {
           initialSelected = optionValue;
         } else if (initialSelected != optionValue) {
@@ -54,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const optionValue = getValueOfSelectedOption(
           mutation.target.querySelectorAll("option")
         );
-        console.log(`Brand value is: ${optionValue}`);
         if (initialSelectedBrand === "unset") {
           initialSelectedBrand = optionValue;
         } else if (initialSelectedBrand != optionValue) {
@@ -70,61 +61,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const optionValue = getValueOfSelectedOption(
           mutation.target.querySelectorAll("option")
         );
-        console.log(`Sort value is: ${optionValue}`);
         if (initialSelectedSort === "unset") {
           initialSelectedSort = optionValue;
         } else if (initialSelectedSort != optionValue) {
           var xhr = new XMLHttpRequest();
-
-          // Настройка запроса
           xhr.open(
             "POST",
             "http://192.168.50.93/local/templates/main/include/ajax/sort.php",
-            true
+            false
           );
-
-          // Устанавливаем заголовок Content-Type
           xhr.setRequestHeader("Content-Type", "application/json");
-          xhr.onload = function () {
-            if (xhr.status === 200) {
-              // Обработка успешного ответа от сервера
-              console.log(
-                "Строка успешно отправлена и получен ответ:",
-                xhr.responseText
-              );
-            } else {
-              // Обработка ошибки
-              console.error(
-                "Произошла ошибка при отправке запроса:",
-                xhr.status
-              );
-            }
-          };
-
-          xhr.onerror = function () {
-            // Обработка ошибки
-            console.error("Произошла ошибка при отправке запроса.");
-          };
-
-          // Определяем функцию, которая будет вызвана после получения ответа от сервера
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-              // Обработка ответа от сервера
-              console.log(xhr.responseText);
-            }
-          };
-
-          // Получаем данные из формы
-          var jsonData;
-
-          jsonData = optionValue;
-
-          // Преобразуем объект данных в строку JSON
-          var jsonString = JSON.stringify(jsonData);
-          console.log("Отправляемая JSON-строка:", jsonString);
-          // Отправка запроса на сервер
+          var jsonData = optionValue;
+          var jsonString = JSON.stringify(jsonData); // создание JSON строки из jsonData
           xhr.send(jsonString);
-
           form.submit();
         }
       }
@@ -138,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function getValueOfSelectedOption(options) {
     for (const option of options) {
       if (option.hasAttribute("data-select2-id")) {
-        return `${option.value}`;
+        return option.value;
       }
     }
     return "";

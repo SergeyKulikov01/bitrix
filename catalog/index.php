@@ -4,9 +4,6 @@ $APPLICATION->SetTitle("каталог");
 
 $dir = $APPLICATION->GetCurDir();
 $path = explode("/", $dir);
-?>
-
-<?
 
 switch ($path) {
     case $path[3] != "":
@@ -20,8 +17,4 @@ switch ($path) {
         break;
 }
 
-
-?>
-
-<pre><? print_r($path) ?></pre>
-<? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php");

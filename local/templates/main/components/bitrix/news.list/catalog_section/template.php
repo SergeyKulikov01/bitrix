@@ -12,18 +12,14 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
+use Bitrix\Main\Application;
+
 $APPLICATION->SetTitle($arResult["SECTION"]["NAME"]);
 $APPLICATION->AddChainItem($arResult["MAIN_SECTION"]["NAME"], $arResult["MAIN_SECTION"]["SECTION_PAGE_URL"]);
 if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]) {
     $APPLICATION->AddChainItem($arResult["SECTION"]["NAME"], $arResult["SECTION"]["SECTION_PAGE_URL"]);
 }
-
-use Bitrix\Main\Application;
-
-//include_once($_SERVER['DOCUMENT_ROOT'] . SITE_TEMPLATE_PATH . "/include/ajax/sort.php");
-
 ?>
-
 <section class="catalog-hero top-section container">
     <div class="catalog-hero__breadcrumbs">
         <div class="breadcrumbs">
@@ -139,9 +135,7 @@ use Bitrix\Main\Application;
             <div class="catalog-hero__select">
                 <div class="select-wrapper">
                     <div class="select cstm-arrows"><select class="select__select" style="width: 100%" data-select-placeholder="Сначала новинки" name="sort">
-                            <option value="" selected="<? if (Application::getInstance()->getContext()->getRequest()->getCookie("sort")) {
-                                                            echo "selected";
-                                                        }; ?>" disabled="disabled"></option>
+                            <option value="" selected="" disabled="disabled"></option>
                             <option value="new" <? if (Application::getInstance()->getContext()->getRequest()->getCookie("sort") == "new") {
                                                     echo "selected";
                                                 }; ?>>Сначала новинки</option>
@@ -261,7 +255,7 @@ use Bitrix\Main\Application;
                 </div>
             </a>
         <? endforeach; ?>
-        <? if (!isset($arResult["ITEMS"])) { ?>
+        <? if (!isset($arResult["ITEMS"][0])) { ?>
             <div class="search-results__empty" data-aos="fade-up">
                 <p class="search-results__empty-title">К сожалению, по вашему запросу ничего не найдено :(</p>
                 <p class="search-results__empty-desk">Скорректируйте ваш запрос или <a href="<? $arResult["MAIN_SECTION"]["SECTION_PAGE_URL"] ?>">перейдите в каталог</a></p>
@@ -275,7 +269,3 @@ use Bitrix\Main\Application;
 <? if ($arResult["NAV_RESULT"]->result->num_rows < $arResult["NAV_RESULT"]->NavRecordCount) {
     echo $arResult["NAV_STRING"];
 }; ?>
-<script>
-
-</script>
-<pre><? print_r($arResult) ?></pre>
