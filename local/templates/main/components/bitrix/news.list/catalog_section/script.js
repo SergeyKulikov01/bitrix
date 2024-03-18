@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var form = document.querySelector(".catalog-hero__activity");
+  const checkbox = document.querySelector('input[name="top"]');
+  const form = document.querySelector(".catalog-hero__activity");
+  const selectFields = document.querySelectorAll(".select__select");
   document
     .querySelector(".catalog-hero__reset")
     .addEventListener("click", function () {
-      const selectFields = document.querySelectorAll(".select__select");
-      const checkbox = document.querySelector('input[name="top"]');
       checkbox.checked = false;
       selectFields.forEach((selectField) => {
         console.log(selectField.value);
@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       form.submit();
     });
-  const checkbox = document.querySelector('input[name="top"]');
-  console.log(checkbox);
+
   checkbox.addEventListener("change", function () {
     form.submit();
   });
-  const selectFields = document.querySelectorAll(".select__select");
+
   for (let selectField of selectFields) {
+    // массив для фильтрации брендов и и жирности
     const targetNode = selectField;
     let initialSelected = "unset";
     const config = { attributes: true };

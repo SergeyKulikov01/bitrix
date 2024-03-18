@@ -112,7 +112,7 @@ if ($arResult["MAIN_SECTION"]["ID"] != $arResult["SECTION"]["ID"]) {
                 <div class="catalog-hero__select desktop">
                     <div class="select-wrapper">
                         <div class="select">
-                            <select class="select__select" style="width: 100%" data-select-placeholder="Тесто" name="fat">
+                            <select class="select__select" style="width: 100%" data-select-placeholder="Жирность" name="fat">
                                 <option value="" selected="selected" disabled="disabled"></option>
                                 <? foreach ($arResult["FILTER_LIST"]["FAT"] as $key => $item) : ?>
                                     <option value="<?= $item ?>" <? if ($_REQUEST["fat"] == $item) {
