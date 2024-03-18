@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
           var xhr = new XMLHttpRequest();
           xhr.open(
             "POST",
-            "http://192.168.50.93/local/templates/main/include/ajax/sort.php",
+            "/local/templates/main/include/ajax/sort.php",
             false
           );
           xhr.setRequestHeader("Content-Type", "application/json");
