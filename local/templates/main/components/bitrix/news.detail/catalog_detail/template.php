@@ -12,6 +12,40 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 CIBlockElement::CounterInc($arResult["ID"]);
+
+$this->SetViewTarget('form'); ?>
+<div class="catalog-detail__form-title">задать вопрос по продукту или&nbsp;оставить заявку на закупку</div>
+<div class="catalog-detail__form-content">
+    <form class="partners-requisites__form" data-form="catalog-detail">
+        <?= bitrix_sessid_post() ?>
+        <input type="hidden" name="prod_link" data-input value="<?= $APPLICATION->GetCurPage() ?>">
+        <input type="hidden" name="prod_name" data-input value="<?= $arResult['NAME'] ?>">
+        <div class="partners-requisites__form-top">
+            <div class="input-wrapper" data-input-parent="">
+                <div class="input-wrapper__placeholder">Имя</div><input class="input" required data-mask-text="" data-parsley-pattern="^[А-Яа-яЁё -]+$" placeholder="Имя" name="firstname" data-input>
+            </div>
+            <div class="input-wrapper" data-input-parent="">
+                <div class="input-wrapper__placeholder">Телефон</div><input class="input" required type="tel" placeholder="Телефон" data-mask-phone="" name="phone" data-input>
+            </div>
+            <div class="input-wrapper" data-input-parent="">
+                <div class="input-wrapper__placeholder">E-mail</div><input class="input" required type="email" placeholder="E-mail" name="email" data-input>
+            </div>
+        </div>
+        <div class="partners-requisites__form-area">
+            <div class="input-wrapper input-wrapper_textarea" data-input-parent="">
+                <div class="input-wrapper__placeholder placeholder_background">Комментраий к заявке</div><textarea class="textarea" type="text" placeholder="Комментраий к заявке" name="comment" data-input></textarea>
+            </div>
+        </div>
+        <div class="partners-requisites__form-bot">
+            <div class="partners-requisites__form-policy">Нажимая на кнопку «Отправить», вы даете согласие с<a class="partners-requisites__form-link" href="#"> политикой в отношении обработки персональных данных</a></div>
+            <button class="partners-requisites__form-btn btn-hover_parent" type="submit" data-send>
+                <div class="btn-hover_circle"></div><span>Отправить</span>
+            </button>
+        </div>
+    </form>
+</div>
+<?
+$this->EndViewTarget();
 ?>
 <div class="catalog-detail__inner">
     <div class="catalog-detail__col slider">
@@ -275,33 +309,9 @@ CIBlockElement::CounterInc($arResult["ID"]);
             </div>
         </div>
         <div class="catalog-detail__form" data-aos="fade-up">
-            <div class="catalog-detail__form-title">задать вопрос по продукту или&nbsp;оставить заявку на закупку</div>
-            <div class="catalog-detail__form-content">
-                <form class="partners-requisites__form" data-form="catalog-detail">
-                    <div class="partners-requisites__form-top">
-                        <div class="input-wrapper" data-input-parent="">
-                            <div class="input-wrapper__placeholder">Имя</div><input class="input" data-input="" required data-mask-text="" data-parsley-pattern="^[А-Яа-яЁё -]+$" placeholder="Имя">
-                        </div>
-                        <div class="input-wrapper" data-input-parent="">
-                            <div class="input-wrapper__placeholder">Телефон</div><input class="input" data-input="" required type="tel" placeholder="Телефон" data-mask-phone="">
-                        </div>
-                        <div class="input-wrapper" data-input-parent="">
-                            <div class="input-wrapper__placeholder">E-mail</div><input class="input" data-input="" required type="email" placeholder="E-mail">
-                        </div>
-                    </div>
-                    <div class="partners-requisites__form-area">
-                        <div class="input-wrapper input-wrapper_textarea" data-input-parent="">
-                            <div class="input-wrapper__placeholder placeholder_background">Комментраий к заявке</div><textarea class="textarea" data-input="" type="text" placeholder="Комментраий к заявке"></textarea>
-                        </div>
-                    </div>
-                    <div class="partners-requisites__form-bot">
-                        <div class="partners-requisites__form-policy">Нажимая на кнопку «Отправить», вы даете согласие с<a class="partners-requisites__form-link" href="#"> политикой в отношении обработки персональных данных</a></div><button class="partners-requisites__form-btn btn-hover_parent" type="submit">
-                            <div class="btn-hover_circle"></div><span>Отправить</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div><a class="catalog-detail__rect btn-hover_parent" href="<?= $arResult['next_product']['detail_link'] ?>">
+            <? $APPLICATION->ShowViewContent("form"); ?>
+        </div>
+        <a class="catalog-detail__rect btn-hover_parent" href="<?= $arResult['next_product']['detail_link'] ?>">
             <div class="catalog-detail__rect-circle">
                 <div class="catalog-hero__rec-circle">
                     <div class="button button-arrow_right btn-hover_parent">
@@ -330,4 +340,5 @@ CIBlockElement::CounterInc($arResult["ID"]);
         </a>
     </div>
 </div>
+<? echo ($APPLICATION->GetCurPage()) ?>
 <pre><? print_r($arResult) ?></pre>
