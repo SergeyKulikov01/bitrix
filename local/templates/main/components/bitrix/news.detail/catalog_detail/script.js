@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("[data-form='catalog-detail']");
-  const send_btn = document.querySelector("[data-send]");
-  const form_inputs = document.querySelectorAll("[data-input]");
 
   form.addEventListener("submit", function (event) {
     event.preventDefault(); // Предотвращаем отправку формы по умолчанию
@@ -38,9 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       //преобразование в обычный js объект
       formObject[name] = value;
     }
-
-    //console.log(formObject);
-    var jsonData = JSON.stringify(formObject);
+    let jsonData = JSON.stringify(formObject);
     BX.ajax({
       url: "/local/templates/main/include/ajax/reqest.php",
       method: "POST",
@@ -52,19 +48,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       onsuccess: function (response) {
         console.log(response);
-        console.log(typeof response);
         let data = JSON.parse(response);
+        console.log(data);
         console.log(data.mess);
         if (data.status === "error") {
           var element_title = document.querySelector("[data-error_title]");
           var element_text = document.querySelector("[data-error_text]");
+          var element_logo = document.querySelector("[data-error_logo]");
+          element_logo.remove();
           element_title.innerHTML = "Ошибка :(";
           element_text.innerHTML = "Обновите страницу или попробуйте попозже";
         }
-      },
-
-      onfailure: function (error) {
-        console.log("Ошибка отправки запроса");
       },
     });
   });
